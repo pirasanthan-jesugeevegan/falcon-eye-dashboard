@@ -1,7 +1,10 @@
 import express, { Application } from 'express';
+import dotenv from 'dotenv';
 import cors, { CorsOptions } from 'cors';
 import pino from 'express-pino-logger';
 import Routes from './routes';
+
+dotenv.config();
 
 export default class Server {
   constructor(app: Application) {

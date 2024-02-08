@@ -1,10 +1,11 @@
 import { Knex, knex } from 'knex';
+import dotenv from 'dotenv';
 
+dotenv.config();
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString:
-      'postgres://testing_db_fq98_user:Bs98A2D5R9kPM4psolfkTgcypJVE9tsc@dpg-cmn72to21fec73copj40-a.oregon-postgres.render.com/testing_db_fq98',
+    connectionString: process.env.DB_URL,
     ssl: {
       rejectUnauthorized: false,
     },
