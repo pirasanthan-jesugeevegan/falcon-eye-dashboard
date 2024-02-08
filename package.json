@@ -3,7 +3,6 @@
   "name": "new-falcon-eye",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
   "workspaces": [
     "packages/backend"
   ],
@@ -11,6 +10,9 @@
     "prettier-all": "prettier --write \"**/*{ts,js,css,html,jsx,tsx}\"",
     "client": "yarn workspace client start",
     "backend": "yarn workspace backend start",
-    "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn client\""
+    "start": "concurrently --kill-others-on-fail \"yarn backend\""
+  },"devDependencies": {
+    "concurrently": "^5.2.0",
+    "prettier": "^2.0.5"
   }
 }
