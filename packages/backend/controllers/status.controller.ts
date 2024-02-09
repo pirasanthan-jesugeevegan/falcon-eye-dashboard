@@ -1,53 +1,8 @@
 import { Request, Response } from 'express';
-import db from '../database/connection';
-const products = [
-  {
-    name: 'Identity Service',
-    slug: 'identity-service',
-    icon: 'FingerprintIcon',
-    api: 'identity_service',
-  },
-  {
-    name: 'Key Distribution Service',
-    slug: 'key-distribution-service',
-    icon: 'SupportIcon',
-    api: 'key_distribution_service',
-  },
-  {
-    name: 'Ledger Support Tool',
-    slug: 'ledger-support-tool',
-    icon: 'PaidIcon',
-    api: 'ledger_support_tool',
-  },
-  {
-    name: 'Transaction Protection',
-    slug: 'transaction-protection',
-    icon: 'SosIcon',
-    api: 'transaction_protection',
-  },
-  {
-    name: 'Recovery as a service',
-    slug: 'recovery-as-a-service',
-    icon: 'SupportAgentIcon',
-    api: 'recovery_as_a_service',
-  },
-  {
-    name: 'Secure Data Service',
-    slug: 'secure-data-service',
-    icon: 'ShieldIcon',
-    api: 'secure_data_service',
-  },
-];
-const getTableName = (type: string, product: string) => {
-  if (type === 'e2e' || type === 'unit') {
-    return `${type}_${product}`;
-  }
-  return null;
-};
-const getNameByApi = (value: string) => {
-  const item = products.find((item) => item.api === value);
-  return item ? item.name : null;
-};
+import products from '../product.json';
+import { getNameByApi, getTableName } from '../utils/extractName';
+import queries from '../database/db_queries';
+
 export default class StatusController {
   async getTotalTests(req: Request, res: Response) {
     try {
@@ -60,10 +15,7 @@ export default class StatusController {
           return res.status(400).json({ error: 'Invalid type or product' });
         }
 
-        const latestTestResult = await db(tableName)
-          .select()
-          .orderBy('id', 'desc')
-          .first();
+        const latestTestResult = await queries.getLastResult(tableName);
 
         if (latestTestResult) {
           totalTests +=
@@ -73,7 +25,7 @@ export default class StatusController {
         }
       }
 
-      res.status(201).json({ totalTests });
+      res.status(200).json({ totalTests });
     } catch (err) {
       res.status(500).json({
         message: 'Internal Server Error!',
@@ -92,10 +44,7 @@ export default class StatusController {
           return res.status(400).json({ error: 'Invalid type or product' });
         }
 
-        const lastResult = await db(tableName)
-          .select()
-          .orderBy('id', 'desc')
-          .first();
+        const lastResult = await queries.getLastResult(tableName);
 
         if (!lastResult) {
           results.push({
