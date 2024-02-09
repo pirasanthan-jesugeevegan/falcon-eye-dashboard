@@ -1,21 +1,23 @@
-import express from 'express';
-import * as http from 'http';
-import pino from 'express-pino-logger';
-import bodyParser from 'body-parser';
-import Routes from './routes';
+import express from 'express'
+import cors, { CorsOptions } from 'cors'
+import * as http from 'http'
+import pino from 'express-pino-logger'
+import bodyParser from 'body-parser'
+import Routes from './routes'
 
 const createServer = (reqLimit = '100kb') => {
-  const app = express();
+    const app = express()
 
-  app.use(bodyParser.urlencoded({ extended: false, limit: reqLimit }));
-  app.use(bodyParser.json({ limit: reqLimit }));
+    app.use(cors())
+    app.use(bodyParser.urlencoded({ extended: false, limit: reqLimit }))
+    app.use(bodyParser.json({ limit: reqLimit }))
 
-  new Routes(app);
+    new Routes(app)
 
-  app.use(pino());
+    app.use(pino())
 
-  const server = http.createServer(app);
-  return server;
-};
+    const server = http.createServer(app)
+    return server
+}
 
-export default createServer;
+export default createServer
