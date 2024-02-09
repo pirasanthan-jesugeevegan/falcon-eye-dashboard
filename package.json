@@ -1,18 +1,21 @@
 {
-  "private": "true",
-  "name": "new-falcon-eye",
-  "version": "1.0.0",
-  "main": "index.js",
-  "workspaces": [
-    "packages/backend"
-  ],
-  "scripts": {
-    "prettier-all": "prettier --write \"**/*{ts,js,css,html,jsx,tsx}\"",
-    "client": "yarn workspace client start",
-    "backend": "yarn workspace backend start",
-    "start": "concurrently --kill-others-on-fail \"yarn backend\""
-  },"devDependencies": {
-    "concurrently": "^5.2.0",
-    "prettier": "^2.0.5"
-  }
+    "private": "true",
+    "name": "new-falcon-eye",
+    "version": "1.0.0",
+    "main": "index.js",
+    "workspaces": [
+        "packages/backend",
+        "packages/client",
+        "packages/shared"
+    ],
+    "scripts": {
+        "prettier-all": "prettier --write \"**/*{ts,js,css,html,jsx,tsx}\"",
+        "client": "yarn workspace client start",
+        "backend": "yarn workspace backend start",
+        "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn client\""
+    },
+    "devDependencies": {
+        "concurrently": "^5.2.0",
+        "prettier": "^2.0.5"
+    }
 }
