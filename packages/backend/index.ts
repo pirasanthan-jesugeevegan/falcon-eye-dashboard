@@ -8,21 +8,11 @@ dotenv.config();
 const app = express();
 const PORT: number = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
-new Routes(app);
-
 app.use(pino());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app
-  .listen(PORT, 'localhost', function () {
-    console.log(`Server is running on port ${PORT}.`);
-  })
-  .on('error', (err: any) => {
-    if (err.code === 'EADDRINUSE') {
-      console.log('Error: address already in use');
-    } else {
-      console.log(err);
-    }
-  });
+new Routes(app);
+app.listen(PORT, 'localhost', function () {
+  console.log(`Server is running on port ${PORT}.`);
+});
