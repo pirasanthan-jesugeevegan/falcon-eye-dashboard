@@ -4,9 +4,9 @@ import { CardContent, Divider, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 
-import MainCard from 'components/Cards/MainCard'
-import SkeletonPopularCard from 'components/Cards/Skeleton/PopularCard'
-import Row from 'components/Row'
+import MainCard from '../../components/Cards/MainCard'
+import SkeletonPopularCard from '../../components/Cards/Skeleton/PopularCard'
+import Row from '../../components/Row'
 
 import { getStatus } from '../../api/get-test-data'
 import { gridSpacing } from '../../redux/constants'
