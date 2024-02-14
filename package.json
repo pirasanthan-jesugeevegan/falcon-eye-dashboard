@@ -2,7 +2,6 @@
     "private": "true",
     "name": "new-falcon-eye",
     "version": "1.0.0",
-    "main": "index.js",
     "workspaces": [
         "packages/backend",
         "packages/client",

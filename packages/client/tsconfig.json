@@ -17,7 +17,8 @@
         "baseUrl": "./src",
         "paths": {
             "@assets/*": ["src/assets/*"]
-        }
+        },
+        "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
-    "include": ["src"]
+    "include": ["src", "../shared/src/types/*"]
 }

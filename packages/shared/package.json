@@ -1,15 +1,14 @@
 {
-  "name": "shared",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/node": "^14.0.9",
-    "typescript": "^3.9.3"
-  }
+    "name": "shared",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/node": "^14.0.9",
+        "typescript": "^5.3.3"
+    }
 }

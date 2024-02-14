@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 // project imports
 import MainCard from '../components/Cards/MainCard'
 
-import JiraTable from '../components/Tables/JiraTable'
+import JiraTable from '../components/Tables/JiraTable.tsx'
 import { gridSpacing } from '../redux/constants'
 import {
     getJiraBugData,

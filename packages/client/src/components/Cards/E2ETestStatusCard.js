@@ -15,7 +15,7 @@ const E2ETestStatusCard = ({ isLoading }) => {
     const [data, setData] = useState([])
     const [isDataLoading, setIsDataLoading] = useState(true)
     const theme = useTheme()
-    console.log(data)
+
     useEffect(() => {
         const fetchData = async () => {
             try {

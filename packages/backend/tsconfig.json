@@ -1,16 +1,15 @@
 {
-  "compilerOptions": {
-    /* Basic Options */
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["ESNext"],
-    "strict": true,
-    /* Module Resolution Options */
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    /* Advanced Options */
-    "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
-    "resolveJsonModule": true
-  }
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "lib": ["ESNext"],
+        "strict": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "baseUrl": "./"
+    },
+    "include": ["../shared/src/types/*"]
 }

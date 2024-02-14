@@ -10,8 +10,8 @@ import {
 import { styled, useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 
-import MainCard from '../../components/Cards/MainCard'
-import TotalIncomeCard from '../../components/Cards/Skeleton/TotalIncomeCard'
+import MainCard from './MainCard'
+import TotalIncomeCard from './Skeleton/TotalIncomeCard'
 
 const CardWrapper = styled(MainCard)(({ theme, backgroundColor }) => ({
     backgroundColor:

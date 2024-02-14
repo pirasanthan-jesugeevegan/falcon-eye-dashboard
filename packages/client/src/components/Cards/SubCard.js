@@ -1,63 +1,107 @@
-import { forwardRef } from 'react';
+import { forwardRef } from 'react'
 
-import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    Divider,
+    Typography,
+} from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import PropTypes from 'prop-types'
 
-const SubCard = forwardRef(({ children, content, contentClass, darkTitle, secondary, sx = {}, contentSX = {}, title, ...others }, ref) => {
-  const theme = useTheme();
-
-  return (
-    <Card
-      ref={ref}
-      sx={{
-        border: '1px solid',
-        borderColor: theme.palette.primary.light,
-        ':hover': {
-          boxShadow: '0 2px 14px 0 rgb(32 40 45 / 8%)'
+const SubCard = forwardRef(
+    (
+        {
+            children,
+            content,
+            contentClass,
+            darkTitle,
+            secondary,
+            sx = {},
+            contentSX = {},
+            title,
+            ...others
         },
-        ...sx
-      }}
-      {...others}
-    >
-      {/* card header and action */}
-      {!darkTitle && title && <CardHeader sx={{ p: 2.5 }} title={<Typography variant="h5">{title}</Typography>} action={secondary} />}
-      {darkTitle && title && <CardHeader sx={{ p: 2.5 }} title={<Typography variant="h4">{title}</Typography>} action={secondary} />}
+        ref
+    ) => {
+        const theme = useTheme()
 
-      {/* content & header divider */}
-      {title && (
-        <Divider
-          sx={{
-            opacity: 1,
-            borderColor: theme.palette.primary.light
-          }}
-        />
-      )}
+        return (
+            <Card
+                ref={ref}
+                sx={{
+                    border: '1px solid',
+                    borderColor: theme.palette.primary.light,
+                    ':hover': {
+                        boxShadow: '0 2px 14px 0 rgb(32 40 45 / 8%)',
+                    },
+                    ...sx,
+                }}
+                {...others}
+            >
+                {/* card header and action */}
+                {!darkTitle && title && (
+                    <CardHeader
+                        sx={{ p: 2.5 }}
+                        title={<Typography variant="h5">{title}</Typography>}
+                        action={secondary}
+                    />
+                )}
+                {darkTitle && title && (
+                    <CardHeader
+                        sx={{ p: 2.5 }}
+                        title={<Typography variant="h4">{title}</Typography>}
+                        action={secondary}
+                    />
+                )}
 
-      {/* card content */}
-      {content && (
-        <CardContent sx={{ p: 2.5, ...contentSX }} className={contentClass || ''}>
-          {children}
-        </CardContent>
-      )}
-      {!content && children}
-    </Card>
-  );
-});
+                {/* content & header divider */}
+                {title && (
+                    <Divider
+                        sx={{
+                            opacity: 1,
+                            borderColor: theme.palette.primary.light,
+                        }}
+                    />
+                )}
+
+                {/* card content */}
+                {content && (
+                    <CardContent
+                        sx={{ p: 2.5, ...contentSX }}
+                        className={contentClass || ''}
+                    >
+                        {children}
+                    </CardContent>
+                )}
+                {!content && children}
+            </Card>
+        )
+    }
+)
 
 SubCard.propTypes = {
-  children: PropTypes.node,
-  content: PropTypes.bool,
-  contentClass: PropTypes.string,
-  darkTitle: PropTypes.bool,
-  secondary: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object]),
-  sx: PropTypes.object,
-  contentSX: PropTypes.object,
-  title: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object])
-};
+    children: PropTypes.node,
+    content: PropTypes.bool,
+    contentClass: PropTypes.string,
+    darkTitle: PropTypes.bool,
+    secondary: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string,
+        PropTypes.object,
+    ]),
+    sx: PropTypes.object,
+    contentSX: PropTypes.object,
+    title: PropTypes.oneOfType([
+        PropTypes.node,
+        PropTypes.string,
+        PropTypes.object,
+    ]),
+}
 
 SubCard.defaultProps = {
-  content: true
-};
+    content: true,
+}
 
-export default SubCard;
+export default SubCard

@@ -26,7 +26,7 @@ import { useTheme } from '@mui/material/styles'
 import * as moment from 'moment'
 import PropTypes from 'prop-types'
 
-import MainCard from '../../components/Cards/MainCard'
+import MainCard from '../Cards/MainCard'
 
 function Row(props) {
     const { row } = props
