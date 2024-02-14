@@ -1,23 +1,21 @@
-// material-ui
-import { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
-import { Grid } from '@mui/material'
+import { Box, Grid, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 
-// project imports
-import MainCard from '../components/Cards/MainCard'
+import MainCard from 'components/Cards/MainCard'
 
 import SmallCard from '../components/Cards/SmallCard'
-import TestDataTable from '../components/Tables/TestDataTable'
+import E2ETestDataTable from '../components/Tables/E2ETestDataTable'
+import UnitTestDataTable from '../components/Tables/UnitTestDataTable'
 import { gridSpacing } from '../redux/constants'
 import { getProductE2EData, getProductUnitData } from '../redux/selectors'
 import { retrieveE2EData, retrieveUnitData } from '../redux/thunks/product'
 import { getApiByName } from '../utils/product-name-converter'
 
-const E2E = ({ title }) => {
+const Products = ({ title }) => {
     const dispatch = useDispatch()
     const theme = useTheme()
 
@@ -25,7 +23,7 @@ const E2E = ({ title }) => {
     const e2eData = useSelector(getProductE2EData(getApiByName(title)))
 
     const [isLoading, setLoading] = useState(true)
-
+    const [value, setValue] = useState(0)
     const [data, setData] = useState([])
     const [isUnitDataFetched, setUnitDataFetched] = useState('')
     const [isE2EDataFetched, setE2EDataFetched] = useState('')
@@ -35,15 +33,20 @@ const E2E = ({ title }) => {
         const passPercentage = (((pass + skip) / totalTests) * 100).toFixed(0)
         const overallResult = isNaN(passPercentage)
             ? 'No Data'
-            : `${passPercentage}% test pass`
+            : `${passPercentage}%`
         return overallResult
     }
+
     const lastItem = data[data.length - 1]
     const percentageData = getTestPercentage(
         lastItem?.pass,
         lastItem?.fail,
         lastItem?.skip
     )
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -74,17 +77,18 @@ const E2E = ({ title }) => {
         isE2EDataFetched,
         isUnitDataFetched,
         unitData,
+        value,
     ])
 
     useEffect(() => {
         const modifiedData = e2eData.data.map((item) => ({ ...item, title }))
         modifiedData.sort((a, b) => new Date(b.date) - new Date(a.date))
         setData(modifiedData)
-    }, [e2eData, title])
+    }, [e2eData, title, value])
 
     return (
         <MainCard
-            title={`E2E Test Result: ${title}`}
+            title={`${value === 0 ? 'Unit' : 'E2E'} Test Result: ${title}`}
             sx={{ boxShadow: theme.shadows[6] }}
         >
             <Grid container spacing={gridSpacing}>
@@ -94,7 +98,6 @@ const E2E = ({ title }) => {
                             <SmallCard
                                 isLoading={isLoading}
                                 title="Latest E2E Run"
-                                subtitle="Status on the latest run"
                                 result={percentageData}
                                 icon={<FingerprintIcon fontSize="inherit" />}
                                 backgroundColor="primary"
@@ -103,31 +106,59 @@ const E2E = ({ title }) => {
                         <Grid item sm={6} xs={12} md={6} lg={4}>
                             <SmallCard
                                 isLoading={isLoading}
-                                title="Latest Unit Test Run"
-                                subtitle="Code Coverage"
+                                title="Latest Unit Run"
                                 result={
-                                    unitData.data[0]?.result[0]?.percentage ||
-                                    'No Data'
+                                    unitData.data[0]?.result[0]?.percentage
+                                        ? `${unitData.data[0]?.result[0]?.percentage}%`
+                                        : 'No Data'
                                 }
                                 icon={<FingerprintIcon fontSize="inherit" />}
                                 backgroundColor="secondary"
                             />
                         </Grid>
-                        <Grid item sm={6} xs={12} md={6} lg={4}>
-                            <SmallCard
-                                isLoading={isLoading}
-                                title="Latest E2E Test Coverage Report"
-                                subtitle="Test Coverage"
-                                result="No Data"
-                                icon={<FingerprintIcon fontSize="inherit" />}
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={12}>
-                            {isLoading ? (
-                                <div>Loading...</div>
-                            ) : (
-                                <TestDataTable data={data} />
-                            )}
+                        {/* <Grid item sm={6} xs={12} md={6} lg={4}>
+              <SmallCard
+                isLoading={isLoading}
+                title="Latest E2E Test Coverage Report"
+                result="No Data"
+                icon={<FingerprintIcon fontSize="inherit" />}
+              />
+            </Grid> */}
+                        <Grid item xs={12}>
+                            <>
+                                <Box
+                                    sx={{
+                                        width: '100%',
+                                        bgcolor: 'background.paper',
+                                    }}
+                                >
+                                    <Tabs
+                                        value={value}
+                                        onChange={handleChange}
+                                        aria-label="disabled tabs example"
+                                        selectionFollowsFocus="true"
+                                    >
+                                        <Tab label="Unit Test" />
+                                        <Tab label="E2E Test" />
+                                    </Tabs>
+                                </Box>
+                                <TabPanel value={value} index={0}>
+                                    {isLoading ? (
+                                        <div>Loading...</div>
+                                    ) : (
+                                        <UnitTestDataTable
+                                            data={unitData.data}
+                                        />
+                                    )}
+                                </TabPanel>
+                                <TabPanel value={value} index={1}>
+                                    {isLoading ? (
+                                        <div>Loading...</div>
+                                    ) : (
+                                        <E2ETestDataTable data={e2eData.data} />
+                                    )}
+                                </TabPanel>
+                            </>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -136,8 +167,25 @@ const E2E = ({ title }) => {
     )
 }
 
-E2E.propTypes = {
+Products.propTypes = {
     title: PropTypes.string,
 }
 
-export default E2E
+export default Products
+
+// TabPanel component
+function TabPanel(props) {
+    const { children, value, index } = props
+
+    return (
+        <div role="tabpanel" hidden={value !== index}>
+            {value === index && <Box>{children}</Box>}
+        </div>
+    )
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired,
+}

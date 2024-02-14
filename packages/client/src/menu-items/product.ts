@@ -26,25 +26,9 @@ const product = {
     children: servicesAndProducts.map((item: ServiceAndProducts) => ({
         id: item.slug,
         title: item.name,
-        type: 'collapse',
+        type: 'item',
         url: `/${item.slug}`,
         icon: iconMapping[item.icon],
-        children: [
-            {
-                id: `${item.slug}-e2e`,
-                title: 'E2E test',
-                type: 'item',
-                url: `/${item.slug}/e2e-test`,
-                breadcrumbs: false,
-            },
-            {
-                id: `${item.slug}-unit`,
-                title: 'Unit test',
-                type: 'item',
-                url: `/${item.slug}/unit-test`,
-                breadcrumbs: false,
-            },
-        ],
     })),
 }
 

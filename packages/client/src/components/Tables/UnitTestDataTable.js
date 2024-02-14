@@ -26,7 +26,7 @@ import { useTheme } from '@mui/material/styles'
 import * as moment from 'moment'
 import PropTypes from 'prop-types'
 
-import MainCard from '../Cards/MainCard'
+import MainCard from 'components/Cards/MainCard'
 
 function Row(props) {
     const { row } = props
@@ -70,7 +70,7 @@ function Row(props) {
             return <MinimizeIcon />
         }
     }
-    const handleRowClick = (rowData, selected) => {
+    const handleRowClick = (selected) => {
         window.open(
             `https://github.com/coincover/coincover-b2b2c/pull/${selected}`,
             '_blank'
@@ -98,8 +98,8 @@ function Row(props) {
                 </TableCell>
                 <TableCell
                     align="right"
-                    onClick={() => handleRowClick(historyRow, row.pull_request)}
-                    hover
+                    onClick={() => handleRowClick(row.pull_request)}
+                    hover={true}
                     style={{ cursor: 'pointer', textDecoration: 'underline' }}
                 >
                     {row.pull_request}
@@ -162,35 +162,34 @@ function Row(props) {
                                 <TableBody>
                                     {row.result.map((historyRow) => (
                                         <TableRow
-                                            key={historyRow.date}
+                                            key={historyRow?.date}
                                             onClick={() =>
                                                 handleRowClick(
-                                                    historyRow,
-                                                    row.pull_request
+                                                    row?.pull_request
                                                 )
                                             }
-                                            hover
+                                            hover={true}
                                             style={{ cursor: 'pointer' }}
                                         >
                                             <TableCell
                                                 component="th"
                                                 scope="row"
                                             >
-                                                {moment(historyRow.date).format(
-                                                    'DD/MM/YYYY h:mm:ss'
-                                                )}
+                                                {moment(
+                                                    historyRow?.date
+                                                ).format('DD/MM/YYYY h:mm:ss')}
                                             </TableCell>
                                             <TableCell>
-                                                {historyRow.author}
+                                                {historyRow?.author}
                                             </TableCell>
                                             <TableCell align="right">
-                                                {historyRow.commit}
+                                                {historyRow?.commit}
                                             </TableCell>
                                             <TableCell align="right">
                                                 <Chip
-                                                    label={`${historyRow.function_coverage}%`}
+                                                    label={`${historyRow?.function_coverage}%`}
                                                     color={fillColour(
-                                                        historyRow.function_coverage
+                                                        historyRow?.function_coverage
                                                     )}
                                                     variant="combined"
                                                     sx={{
@@ -201,9 +200,9 @@ function Row(props) {
                                             </TableCell>
                                             <TableCell align="right">
                                                 <Chip
-                                                    label={`${historyRow.line_coverage}%`}
+                                                    label={`${historyRow?.line_coverage}%`}
                                                     color={fillColour(
-                                                        historyRow.line_coverage
+                                                        historyRow?.line_coverage
                                                     )}
                                                     variant="combined"
                                                     sx={{
@@ -214,9 +213,9 @@ function Row(props) {
                                             </TableCell>
                                             <TableCell align="right">
                                                 <Chip
-                                                    label={`${historyRow.statement_coverage}%`}
+                                                    label={`${historyRow?.statement_coverage}%`}
                                                     color={fillColour(
-                                                        historyRow.statement_coverage
+                                                        historyRow?.statement_coverage
                                                     )}
                                                     variant="combined"
                                                     sx={{
@@ -227,9 +226,9 @@ function Row(props) {
                                             </TableCell>
                                             <TableCell align="right">
                                                 <Chip
-                                                    label={`${historyRow.percentage}%`}
+                                                    label={`${historyRow?.percentage}%`}
                                                     color={fillColour(
-                                                        historyRow.percentage
+                                                        historyRow?.percentage
                                                     )}
                                                     variant="combined"
                                                     sx={{
@@ -286,7 +285,16 @@ const UnitTestDataTable = ({ isLoading, data }) => {
     return (
         <>
             {!isLoading && data.length > 0 ? (
-                <TableContainer component={Paper}>
+                <TableContainer
+                    component={Paper}
+                    sx={{
+                        backgroundColor:
+                            theme.palette.mode === 'dark' &&
+                            theme.palette.dark.dark,
+                        borderRadius: '5px',
+                        boxShadow: theme.shadows[5],
+                    }}
+                >
                     <Table aria-label="collapsible table">
                         <TableHead>
                             <TableRow>
@@ -323,7 +331,15 @@ const UnitTestDataTable = ({ isLoading, data }) => {
                     />
                 </TableContainer>
             ) : (
-                <MainCard sx={{ boxShadow: theme.shadows[6] }}>
+                <MainCard
+                    sx={{
+                        backgroundColor:
+                            theme.palette.mode === 'dark' &&
+                            theme.palette.dark.dark,
+                        borderRadius: '5px',
+                        boxShadow: theme.shadows[5],
+                    }}
+                >
                     <Typography sx={{ textAlign: 'center' }}>
                         No Data
                     </Typography>

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import Paper from '@mui/material/Paper'
+import { useTheme } from '@mui/material/styles'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -14,7 +15,6 @@ import Typography from '@mui/material/Typography'
 import * as moment from 'moment'
 import PropTypes from 'prop-types'
 
-import { getSlugByName } from '../../utils/product-name-converter'
 import Transitions from '../extended/Transitions'
 
 const style = {
@@ -30,11 +30,12 @@ const style = {
     boxShadow: 24,
     p: 4,
 }
-const TestDataTable = ({ data }) => {
+const E2ETestDataTable = ({ data }) => {
     const [selectedRowData, setSelectedRowData] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [page, setPage] = useState(0)
     const [rowsPerPage, setRowsPerPage] = useState(10)
+    const theme = useTheme()
 
     const handleRowClick = (rowData) => {
         setSelectedRowData(rowData)
@@ -56,7 +57,16 @@ const TestDataTable = ({ data }) => {
 
     return (
         <div>
-            <TableContainer component={Paper}>
+            <TableContainer
+                component={Paper}
+                sx={{
+                    backgroundColor:
+                        theme.palette.mode === 'dark' &&
+                        theme.palette.dark.dark,
+                    borderRadius: '5px',
+                    boxShadow: theme.shadows[5],
+                }}
+            >
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -116,11 +126,7 @@ const TestDataTable = ({ data }) => {
                         </Typography>
                         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                             <iframe
-                                src={`https://coincover.github.io/coincover-amt/${getSlugByName(
-                                    selectedRowData?.title
-                                )}/functional/${moment(
-                                    selectedRowData?.date
-                                ).format('YYYY-MM-DD')}/index.html`}
+                                src={selectedRowData?.report_url}
                                 title="Modal Iframe"
                                 width="100%"
                                 height="600px"
@@ -133,8 +139,8 @@ const TestDataTable = ({ data }) => {
     )
 }
 
-TestDataTable.propTypes = {
+E2ETestDataTable.propTypes = {
     data: PropTypes.array,
 }
 
-export default TestDataTable
+export default E2ETestDataTable

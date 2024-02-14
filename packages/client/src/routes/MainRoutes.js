@@ -6,8 +6,7 @@ import Loadable from '../components/Loadable'
 import MainLayout from '../layout/MainLayout'
 // pages
 const Dashboard = Loadable(lazy(() => import('../pages/Dashboard')))
-const Products = Loadable(lazy(() => import('../pages/E2E')))
-const Unit = Loadable(lazy(() => import('../pages/Unit')))
+const Products = Loadable(lazy(() => import('../pages/Products')))
 const Jira = Loadable(lazy(() => import('../pages/Jira')))
 const SonarCloud = Loadable(lazy(() => import('../pages/SonarCloud')))
 
@@ -16,7 +15,6 @@ import productData from '../menu-items/product'
 
 const componentsMap = {
     Products: Products,
-    Unit: Unit,
     Jira: Jira,
 }
 
@@ -30,18 +28,6 @@ function transformProductData(data) {
                     title: item.title,
                 }),
             },
-            ...item.children.map((child) => {
-                const Component =
-                    componentsMap[
-                        child.id.includes('unit') ? 'Unit' : 'Products'
-                    ]
-                return {
-                    path: child.url.split('/').pop(),
-                    element: React.createElement(Component, {
-                        title: item.title,
-                    }),
-                }
-            }),
         ],
     }))
 }
@@ -63,15 +49,6 @@ const MainRoutes = {
         {
             path: '',
             element: <Dashboard />,
-        },
-        {
-            path: 'dashboard',
-            children: [
-                {
-                    path: 'default',
-                    element: <Dashboard />,
-                },
-            ],
         },
         ...transformedProductData,
         {
