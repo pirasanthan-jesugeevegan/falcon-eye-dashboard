@@ -42,4 +42,10 @@ export const servicesAndProducts = [
         icon: 'ShieldIcon',
         api: 'secure_data_service',
     },
+    {
+        name: 'Node Tools',
+        slug: 'node-tools',
+        icon: 'BuildIcon',
+        api: 'node_tools',
+    },
 ]

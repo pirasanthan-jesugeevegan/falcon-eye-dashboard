@@ -66,7 +66,7 @@ export default class ProductsController {
                 data = rawData
             }
 
-            res.status(201).json(data)
+            res.status(200).json(data)
         } catch (err) {
             res.status(500).json({
                 message: 'Internal Server Error!',

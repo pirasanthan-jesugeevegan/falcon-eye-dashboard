@@ -4,6 +4,7 @@ import ShieldIcon from '@mui/icons-material/Shield'
 import SosIcon from '@mui/icons-material/Sos'
 import SupportIcon from '@mui/icons-material/Support'
 import SupportAgentIcon from '@mui/icons-material/SupportAgent'
+import BuildIcon from '@mui/icons-material/Build'
 
 import { servicesAndProducts } from 'shared/src/service-and-product-list'
 
@@ -14,6 +15,7 @@ const iconMapping: IconMapping = {
     SosIcon,
     SupportIcon,
     SupportAgentIcon,
+    BuildIcon,
 }
 
 const product = {

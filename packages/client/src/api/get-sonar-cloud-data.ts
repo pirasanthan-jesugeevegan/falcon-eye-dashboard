@@ -1,4 +1,4 @@
-import commonAxios from './Common'
+import commonAxios from './common'
 
 export async function getPullRequestData(project: string) {
     try {
