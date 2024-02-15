@@ -2,14 +2,20 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown'
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt'
 import { Avatar, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
 import React from 'react'
+
+interface RowProps {
+    title?: string
+    data?: { title: string; status: string; result: string }
+}
+
 const Row = ({ title, data }: RowProps) => {
     const theme = useTheme()
 
     if (!data) {
         return null
     }
+
     const { status, result } = data
     return (
         <Grid container direction="column">
@@ -83,11 +89,6 @@ const Row = ({ title, data }: RowProps) => {
             </Grid>
         </Grid>
     )
-}
-
-Row.propTypes = {
-    title: PropTypes.string,
-    data: PropTypes.object,
 }
 
 export default Row

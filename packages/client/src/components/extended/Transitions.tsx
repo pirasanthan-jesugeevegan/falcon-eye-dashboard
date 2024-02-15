@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react'
 import { Box, Collapse, Fade, Grow, Slide, Zoom } from '@mui/material'
-import PropTypes from 'prop-types'
 
 interface TransitionsProps {
     children?: React.ReactNode
@@ -13,10 +12,20 @@ interface TransitionsProps {
         | 'bottom-right'
         | 'bottom'
     direction?: 'up' | 'down' | 'left' | 'right'
+    in?: boolean
 }
 
 const Transitions = forwardRef<HTMLDivElement, TransitionsProps>(
-    ({ children, position, type, direction, ...others }, ref) => {
+    (
+        {
+            children,
+            position = 'top-left',
+            direction = 'up',
+            type = 'grow',
+            ...others
+        },
+        ref
+    ) => {
         let positionSX: React.CSSProperties = {
             transformOrigin: '0 0 0',
         }
@@ -101,25 +110,5 @@ const Transitions = forwardRef<HTMLDivElement, TransitionsProps>(
         )
     }
 )
-
-Transitions.propTypes = {
-    children: PropTypes.node,
-    type: PropTypes.oneOf(['grow', 'fade', 'collapse', 'slide', 'zoom']),
-    position: PropTypes.oneOf([
-        'top-left',
-        'top-right',
-        'top',
-        'bottom-left',
-        'bottom-right',
-        'bottom',
-    ]),
-    direction: PropTypes.oneOf(['up', 'down', 'left', 'right']),
-}
-
-Transitions.defaultProps = {
-    type: 'grow',
-    position: 'top-left',
-    direction: 'up',
-}
 
 export default Transitions

@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import { Avatar, Tooltip, Typography } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -13,8 +12,8 @@ import { IconGitPullRequest, IconSquareCheck, IconSquareX } from '@tabler/icons'
 import moment from 'moment'
 
 const SonarCloudTable = ({ data }: { data: PullRequest[] }) => {
-    const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(10)
+    const [page, setPage] = useState<number>(0)
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10)
 
     function stringAvatar(name: string) {
         const words = name.split(' ')

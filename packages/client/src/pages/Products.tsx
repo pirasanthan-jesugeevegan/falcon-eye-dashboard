@@ -158,6 +158,7 @@ const Products = ({ title }: { title: string }) => {
                                     ) : (
                                         <UnitTestDataTable
                                             data={unitData.data}
+                                            isLoading={isLoading}
                                         />
                                     )}
                                 </TabPanel>
@@ -165,7 +166,10 @@ const Products = ({ title }: { title: string }) => {
                                     {isLoading ? (
                                         <div>Loading...</div>
                                     ) : (
-                                        <E2ETestDataTable data={e2eData.data} />
+                                        <E2ETestDataTable
+                                            data={e2eData.data}
+                                            isLoading={isLoading}
+                                        />
                                     )}
                                 </TabPanel>
                             </>

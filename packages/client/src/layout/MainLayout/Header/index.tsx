@@ -1,12 +1,9 @@
+import React from 'react'
 import { Avatar, Box, ButtonBase } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { IconMenu2 } from '@tabler/icons'
-import PropTypes from 'prop-types'
-
 import ThemeSection from './ThemeSection'
-
 import LogoSection from '../LogoSection'
-import React from 'react'
 
 const Header = ({ handleLeftDrawerToggle }: any) => {
     const theme = useTheme()
@@ -60,10 +57,6 @@ const Header = ({ handleLeftDrawerToggle }: any) => {
             <ThemeSection />
         </>
     )
-}
-
-Header.propTypes = {
-    handleLeftDrawerToggle: PropTypes.func,
 }
 
 export default Header

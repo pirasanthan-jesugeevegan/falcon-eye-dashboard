@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import MinimizeIcon from '@mui/icons-material/Minimize'
@@ -23,17 +22,14 @@ import {
     Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import * as moment from 'moment'
-import PropTypes from 'prop-types'
-
+import moment from 'moment'
 import MainCard from 'components/Cards/MainCard'
 
-function Row(props) {
-    const { row } = props
-    const [open, setOpen] = React.useState(false)
+function Row({ row }: { row: UnitTestData }) {
+    const [open, setOpen] = useState<boolean>(false)
 
     const lastResult = row.result[row.result.length - 1]
-    const fillColour = (value) => {
+    const fillColour = (value: string) => {
         const numericValue = parseFloat(value)
         if (numericValue >= 90 && numericValue <= 100) {
             return 'success'
@@ -43,13 +39,13 @@ function Row(props) {
             return 'error'
         }
     }
-    function getStatusChange(data) {
-        if (!data.result || data.result.length < 2) {
+    function getStatusChange(testData: UnitTestData) {
+        if (!testData.result || testData.result.length < 2) {
             return <MinimizeIcon />
         }
 
-        const lastResult = data.result[data.result.length - 1]
-        const secondLastResult = data.result[data.result.length - 2]
+        const lastResult = testData.result[testData.result.length - 1]
+        const secondLastResult = testData.result[testData.result.length - 2]
 
         if (!lastResult || !secondLastResult) {
             return 'Result data missing'
@@ -70,7 +66,7 @@ function Row(props) {
             return <MinimizeIcon />
         }
     }
-    const handleRowClick = (selected) => {
+    const handleRowClick = (selected: string) => {
         window.open(
             `https://github.com/coincover/coincover-b2b2c/pull/${selected}`,
             '_blank'
@@ -99,7 +95,6 @@ function Row(props) {
                 <TableCell
                     align="right"
                     onClick={() => handleRowClick(row.pull_request)}
-                    hover={true}
                     style={{ cursor: 'pointer', textDecoration: 'underline' }}
                 >
                     {row.pull_request}
@@ -117,7 +112,6 @@ function Row(props) {
                     <Chip
                         label={`${lastResult.percentage}%`}
                         color={fillColour(lastResult.percentage)}
-                        variant="combined"
                         sx={{ borderRadius: '5px', width: '100%' }}
                     />
                     {getStatusChange(row)}
@@ -160,85 +154,91 @@ function Row(props) {
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {row.result.map((historyRow) => (
-                                        <TableRow
-                                            key={historyRow?.date}
-                                            onClick={() =>
-                                                handleRowClick(
-                                                    row?.pull_request
-                                                )
-                                            }
-                                            hover={true}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            <TableCell
-                                                component="th"
-                                                scope="row"
+                                    {row.result.map(
+                                        (historyRow: UnitTestResult) => (
+                                            <TableRow
+                                                key={historyRow?.date}
+                                                onClick={() =>
+                                                    handleRowClick(
+                                                        row?.pull_request
+                                                    )
+                                                }
+                                                hover={true}
+                                                style={{
+                                                    cursor: 'pointer',
+                                                }}
                                             >
-                                                {moment(
-                                                    historyRow?.date
-                                                ).format('DD/MM/YYYY h:mm:ss')}
-                                            </TableCell>
-                                            <TableCell>
-                                                {historyRow?.author}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                {historyRow?.commit}
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Chip
-                                                    label={`${historyRow?.function_coverage}%`}
-                                                    color={fillColour(
-                                                        historyRow?.function_coverage
+                                                <TableCell
+                                                    component="th"
+                                                    scope="row"
+                                                >
+                                                    {moment(
+                                                        historyRow?.date
+                                                    ).format(
+                                                        'DD/MM/YYYY h:mm:ss'
                                                     )}
-                                                    variant="combined"
-                                                    sx={{
-                                                        borderRadius: '5px',
-                                                        width: '100%',
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Chip
-                                                    label={`${historyRow?.line_coverage}%`}
-                                                    color={fillColour(
-                                                        historyRow?.line_coverage
-                                                    )}
-                                                    variant="combined"
-                                                    sx={{
-                                                        borderRadius: '5px',
-                                                        width: '100%',
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Chip
-                                                    label={`${historyRow?.statement_coverage}%`}
-                                                    color={fillColour(
-                                                        historyRow?.statement_coverage
-                                                    )}
-                                                    variant="combined"
-                                                    sx={{
-                                                        borderRadius: '5px',
-                                                        width: '100%',
-                                                    }}
-                                                />
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Chip
-                                                    label={`${historyRow?.percentage}%`}
-                                                    color={fillColour(
-                                                        historyRow?.percentage
-                                                    )}
-                                                    variant="combined"
-                                                    sx={{
-                                                        borderRadius: '5px',
-                                                        width: '100%',
-                                                    }}
-                                                />
-                                            </TableCell>
-                                        </TableRow>
-                                    ))}
+                                                </TableCell>
+                                                <TableCell>
+                                                    {historyRow?.author}
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    {historyRow?.commit}
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <Chip
+                                                        label={`${historyRow?.function_coverage}%`}
+                                                        color={fillColour(
+                                                            historyRow?.function_coverage
+                                                        )}
+                                                        variant="filled"
+                                                        sx={{
+                                                            borderRadius: '5px',
+                                                            width: '100%',
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <Chip
+                                                        label={`${historyRow?.line_coverage}%`}
+                                                        color={fillColour(
+                                                            historyRow?.line_coverage
+                                                        )}
+                                                        variant="filled"
+                                                        sx={{
+                                                            borderRadius: '5px',
+                                                            width: '100%',
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <Chip
+                                                        label={`${historyRow?.statement_coverage}%`}
+                                                        color={fillColour(
+                                                            historyRow?.statement_coverage
+                                                        )}
+                                                        variant="filled"
+                                                        sx={{
+                                                            borderRadius: '5px',
+                                                            width: '100%',
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                                <TableCell align="right">
+                                                    <Chip
+                                                        label={`${historyRow?.percentage}%`}
+                                                        color={fillColour(
+                                                            historyRow?.percentage
+                                                        )}
+                                                        variant="filled"
+                                                        sx={{
+                                                            borderRadius: '5px',
+                                                            width: '100%',
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                            </TableRow>
+                                        )
+                                    )}
                                 </TableBody>
                             </Table>
                         </Box>
@@ -249,36 +249,23 @@ function Row(props) {
     )
 }
 
-Row.propTypes = {
-    row: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        pull_request: PropTypes.string.isRequired,
-        result: PropTypes.arrayOf(
-            PropTypes.shape({
-                date: PropTypes.string.isRequired,
-                commit: PropTypes.string.isRequired,
-                percentage: PropTypes.string.isRequired,
-                statement_coverage: PropTypes.string.isRequired,
-                function_coverage: PropTypes.string.isRequired,
-                branch_coverage: PropTypes.string.isRequired,
-                line_coverage: PropTypes.string.isRequired,
-                author: PropTypes.string.isRequired,
-            })
-        ).isRequired,
-    }).isRequired,
-}
-
-const UnitTestDataTable = ({ isLoading, data }) => {
+const UnitTestDataTable = ({
+    isLoading,
+    data,
+}: {
+    isLoading: boolean
+    data: UnitTestData[]
+}) => {
     const theme = useTheme()
 
-    const [page, setPage] = useState(0)
-    const [rowsPerPage, setRowsPerPage] = useState(10)
+    const [page, setPage] = useState<number>(0)
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10)
 
-    const handleChangePage = (event, newPage) => {
+    const handleChangePage = (event: any, newPage: number) => {
         setPage(newPage)
     }
 
-    const handleChangeRowsPerPage = (event) => {
+    const handleChangeRowsPerPage = (event: any) => {
         setRowsPerPage(parseInt(event.target.value, 10))
         setPage(0)
     }
@@ -289,8 +276,9 @@ const UnitTestDataTable = ({ isLoading, data }) => {
                     component={Paper}
                     sx={{
                         backgroundColor:
-                            theme.palette.mode === 'dark' &&
-                            theme.palette.dark.dark,
+                            theme.palette.mode === 'dark'
+                                ? theme.palette.dark.dark
+                                : theme.palette.background.paper,
                         borderRadius: '5px',
                         boxShadow: theme.shadows[5],
                     }}
@@ -316,7 +304,7 @@ const UnitTestDataTable = ({ isLoading, data }) => {
                                     page * rowsPerPage,
                                     page * rowsPerPage + rowsPerPage
                                 )
-                                .map((row) => (
+                                .map((row: UnitTestData) => (
                                     <Row key={row.id} row={row} />
                                 ))}
                         </TableBody>
@@ -347,11 +335,6 @@ const UnitTestDataTable = ({ isLoading, data }) => {
             )}
         </>
     )
-}
-
-UnitTestDataTable.propTypes = {
-    isLoading: PropTypes.bool,
-    data: PropTypes.array,
 }
 
 export default UnitTestDataTable
