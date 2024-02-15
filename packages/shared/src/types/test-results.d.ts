@@ -1,6 +1,6 @@
 interface TestData {
     id: number
-    date: string // or you can use Date type if you parse the string to Date
+    date: string
     pass: number
     fail: number
     skip: number

@@ -1,15 +1,9 @@
-// material-ui
-import { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import { Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-
-// project imports
 import MainCard from '../components/Cards/MainCard'
-
-import JiraTable from '../components/Tables/JiraTable.tsx'
+import JiraTable from '../components/Tables/JiraTable'
 import { gridSpacing } from '../redux/constants'
 import {
     getJiraBugData,
@@ -18,19 +12,18 @@ import {
 } from '../redux/selectors'
 import { retrieveJiraData } from '../redux/thunks/jira'
 
-const Products = ({ title }) => {
+const Products = ({ title }: { title: string }) => {
     const jiraBugData = useSelector(getJiraBugData)
     const jiraDefectData = useSelector(getJiraDefectData)
     const jiraSecurityData = useSelector(getJiraSecurityData)
 
-    const [bug, setBug] = useState(jiraBugData)
-    const [defect, setDefect] = useState(jiraDefectData)
-    const [security, setSecurity] = useState(jiraSecurityData)
+    const [bug, setBug] = useState<IssueResponse>(jiraBugData)
+    const [defect, setDefect] = useState<IssueResponse>(jiraDefectData)
+    const [security, setSecurity] = useState<IssueResponse>(jiraSecurityData)
+    const [isLoading, setLoading] = useState<boolean>(true)
+    const [data, setData] = useState<any>([])
 
     const dispatch = useDispatch()
-    const [isLoading, setLoading] = useState(true)
-
-    const [data, setData] = useState([])
     const theme = useTheme()
 
     useEffect(() => {
@@ -39,16 +32,19 @@ const Products = ({ title }) => {
                 setLoading(true)
 
                 if (!jiraBugData || jiraBugData.length === 0) {
+                    // @ts-ignore
                     setBug(await dispatch(retrieveJiraData('bug')))
                 }
                 if (!jiraDefectData || jiraDefectData.length === 0) {
                     setDefect(
+                        // @ts-ignore
                         await dispatch(retrieveJiraData('customer defect'))
                     )
                 }
 
                 if (!jiraSecurityData || jiraSecurityData.length === 0) {
                     setSecurity(
+                        // @ts-ignore
                         await dispatch(retrieveJiraData('security issue'))
                     )
                 }
@@ -98,10 +94,6 @@ const Products = ({ title }) => {
             )}
         </>
     )
-}
-
-Products.propTypes = {
-    title: PropTypes.string,
 }
 
 export default Products

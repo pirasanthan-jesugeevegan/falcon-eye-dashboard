@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import SupportIcon from '@mui/icons-material/Support'
 import { Grid } from '@mui/material'
@@ -10,11 +9,9 @@ import {
     IconTicket,
 } from '@tabler/icons'
 import { useDispatch, useSelector } from 'react-redux'
-
 // import { OverviewTraffic } from 'components/Charts/PieChat';
 // import TotalOrderLineChartCard from '../components/Cards/TotalOrderLineChartCard';
 // import TotalGrowthBarChart from '../components/Cards/TotalGrowthBarChart';
-
 import { getProjectStatusData } from '../api/get-sonar-cloud-data'
 import { getE2eTotalTest } from '../api/get-test-data'
 // import BajajAreaChartCard from '../components/Cards/BajajAreaChartCard';
@@ -36,16 +33,17 @@ const Dashboard = () => {
     const jiraDefectData = useSelector(getJiraDefectData)
     const jiraSecurityData = useSelector(getJiraSecurityData)
 
-    const [bug, setBug] = useState(jiraBugData)
-    const [defect, setDefect] = useState(jiraDefectData)
-    const [security, setSecurity] = useState(jiraSecurityData)
-
-    const [data, setData] = useState([])
-    const [b2b2cSonarCloudStatusData, setB2b2cSonarCloudStatusData] = useState(
-        []
-    )
-    const [txmSonarCloudStatusData, setTxmSonarCloudStatusData] = useState([])
-    const [isLoading, setLoading] = useState(true)
+    const [bug, setBug] = useState<IssueResponse>(jiraBugData)
+    const [defect, setDefect] = useState<IssueResponse>(jiraDefectData)
+    const [security, setSecurity] = useState<IssueResponse>(jiraSecurityData)
+    const [data, setData] = useState<any>([])
+    const [b2b2cSonarCloudStatusData, setB2b2cSonarCloudStatusData] = useState<
+        ProjectStatusData | []
+    >([])
+    const [txmSonarCloudStatusData, setTxmSonarCloudStatusData] = useState<
+        ProjectStatusData | []
+    >([])
+    const [isLoading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
         setLoading(false)
@@ -54,16 +52,19 @@ const Dashboard = () => {
                 const result = await getE2eTotalTest()
 
                 if (!jiraBugData || jiraBugData.length === 0) {
+                    // @ts-ignore
                     setBug(await dispatch(retrieveJiraData('bug')))
                 }
                 if (!jiraDefectData || jiraDefectData.length === 0) {
                     setDefect(
+                        // @ts-ignore
                         await dispatch(retrieveJiraData('customer defect'))
                     )
                 }
 
                 if (!jiraSecurityData || jiraSecurityData.length === 0) {
                     setSecurity(
+                        // @ts-ignore
                         await dispatch(retrieveJiraData('security issue'))
                     )
                 }
@@ -149,8 +150,10 @@ const Dashboard = () => {
                                 title="coincover-b2b2c"
                                 subtitle="SonarCloud"
                                 result={
-                                    b2b2cSonarCloudStatusData.projectStatus
-                                        ?.status
+                                    Array.isArray(b2b2cSonarCloudStatusData)
+                                        ? null
+                                        : b2b2cSonarCloudStatusData
+                                              .projectStatus?.status
                                 }
                                 icon={<FingerprintIcon fontSize="inherit" />}
                             />
@@ -161,8 +164,10 @@ const Dashboard = () => {
                                 title="coincover-txm"
                                 subtitle="SonarCloud"
                                 result={
-                                    txmSonarCloudStatusData.projectStatus
-                                        ?.status
+                                    Array.isArray(txmSonarCloudStatusData)
+                                        ? null
+                                        : txmSonarCloudStatusData.projectStatus
+                                              ?.status
                                 }
                                 icon={<SupportIcon fontSize="inherit" />}
                             />

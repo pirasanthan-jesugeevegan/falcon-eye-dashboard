@@ -142,7 +142,7 @@ LargeCard.propTypes = {
     title: PropTypes.string,
     value: PropTypes.string,
     subtitle: PropTypes.string,
-    icon: PropTypes.node,
+    icon: PropTypes.any,
     backgroundColor: PropTypes.string,
 }
 

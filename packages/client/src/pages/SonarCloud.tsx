@@ -1,30 +1,19 @@
 import { useEffect, useState } from 'react'
-
 import { Grid } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
-
 import MainCard from '../components/Cards/MainCard'
-
 import { getPullRequestData } from '../api/get-sonar-cloud-data'
 import SonarCloudTable from '../components/Tables/SonarCloudTable'
 import { gridSpacing } from '../redux/constants'
+import React from 'react'
+import { projectToValue } from 'utils/name-converter'
 
-const SonarCloud = ({ title }) => {
+const SonarCloud = ({ title }: { title: string }) => {
     const [isLoading, setLoading] = useState(true)
-    const [sonarCloudPullRequest, setSonarCloudPullRequest] = useState([])
-    const theme = useTheme()
+    const [sonarCloudPullRequest, setSonarCloudPullRequest] =
+        useState<SonarCloudData>({ pullRequests: [] })
 
-    const projectToValue = (value) => {
-        switch (value) {
-            case 'List of Pull Request Results for coincover-b2b2c':
-                return 'coincover_coincover-b2b2c'
-            case 'List of Pull Request Results for coincover-txm':
-                return 'coincover_coincover-txm'
-            default:
-                return value
-        }
-    }
+    const theme = useTheme()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -52,7 +41,7 @@ const SonarCloud = ({ title }) => {
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             {isLoading ||
                             !sonarCloudPullRequest ||
-                            sonarCloudPullRequest.length === 0 ? (
+                            sonarCloudPullRequest.pullRequests.length === 0 ? (
                                 <div>Loading...</div>
                             ) : (
                                 <SonarCloudTable
@@ -65,10 +54,6 @@ const SonarCloud = ({ title }) => {
             </Grid>
         </MainCard>
     )
-}
-
-SonarCloud.propTypes = {
-    title: PropTypes.string,
 }
 
 export default SonarCloud

@@ -1,20 +1,25 @@
+interface Contributor {
+    name: string
+    login: string
+    avatar: string
+}
+
+interface Commit {
+    sha: string
+    author: {
+        name: string
+        login?: string
+        avatar?: string
+    }
+    date: string
+    message: string
+}
+
 interface Status {
     qualityGateStatus: string
     bugs: number
     vulnerabilities: number
     codeSmells: number
-}
-
-interface CommitAuthor {
-    name: string
-    login: string
-    avatar: string
-}
-
-interface Contributor {
-    name: string
-    login: string
-    avatar: string
 }
 
 interface PullRequest {
@@ -26,11 +31,36 @@ interface PullRequest {
     analysisDate: string
     url: string
     target: string
-    commit: {
-        sha: string
-        author: CommitAuthor
-        date: string
-        message: string
-    }
+    commit: Commit
     contributors: Contributor[]
+}
+
+interface SonarCloudData {
+    pullRequests: PullRequest[]
+}
+interface Condition {
+    status: string
+    metricKey: string
+    comparator: string
+    periodIndex: number
+    errorThreshold: string
+    actualValue: string
+}
+
+interface Period {
+    index: number
+    mode: string
+    date: string
+    parameter: string
+}
+
+interface ProjectStatus {
+    status: string
+    conditions: Condition[]
+    periods: Period[]
+    ignoredConditions: boolean
+}
+
+interface ProjectStatusData {
+    projectStatus: ProjectStatus
 }

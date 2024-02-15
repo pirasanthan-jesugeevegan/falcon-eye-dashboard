@@ -2,11 +2,8 @@ import React, { useEffect, useState } from 'react'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import { Box, Grid, Tab, Tabs } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-
 import MainCard from 'components/Cards/MainCard'
-
 import SmallCard from '../components/Cards/SmallCard'
 import E2ETestDataTable from '../components/Tables/E2ETestDataTable'
 import UnitTestDataTable from '../components/Tables/UnitTestDataTable'
@@ -15,23 +12,23 @@ import { getProductE2EData, getProductUnitData } from '../redux/selectors'
 import { retrieveE2EData, retrieveUnitData } from '../redux/thunks/product'
 import { getApiByName } from '../utils/product-name-converter'
 
-const Products = ({ title }) => {
+const Products = ({ title }: { title: string }) => {
     const dispatch = useDispatch()
     const theme = useTheme()
 
     const unitData = useSelector(getProductUnitData(getApiByName(title)))
     const e2eData = useSelector(getProductE2EData(getApiByName(title)))
 
-    const [isLoading, setLoading] = useState(true)
-    const [value, setValue] = useState(0)
-    const [data, setData] = useState([])
-    const [isUnitDataFetched, setUnitDataFetched] = useState('')
-    const [isE2EDataFetched, setE2EDataFetched] = useState('')
+    const [isLoading, setLoading] = useState<boolean>(true)
+    const [value, setValue] = useState<number>(0)
+    const [data, setData] = useState<TestData[]>([])
+    const [isUnitDataFetched, setUnitDataFetched] = useState<string>('')
+    const [isE2EDataFetched, setE2EDataFetched] = useState<string>('')
 
-    const getTestPercentage = (pass, fail, skip) => {
+    const getTestPercentage = (pass: number, fail: number, skip: number) => {
         const totalTests = pass + fail + skip
         const passPercentage = (((pass + skip) / totalTests) * 100).toFixed(0)
-        const overallResult = isNaN(passPercentage)
+        const overallResult = isNaN(Number(passPercentage))
             ? 'No Data'
             : `${passPercentage}%`
         return overallResult
@@ -44,7 +41,7 @@ const Products = ({ title }) => {
         lastItem?.skip
     )
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setValue(newValue)
     }
 
@@ -54,10 +51,12 @@ const Products = ({ title }) => {
                 setLoading(true)
 
                 if (isUnitDataFetched !== getApiByName(title)) {
+                    // @ts-ignore
                     await dispatch(retrieveUnitData(getApiByName(title)))
                     setUnitDataFetched(getApiByName(title))
                 }
                 if (isE2EDataFetched !== getApiByName(title)) {
+                    // @ts-ignore
                     await dispatch(retrieveE2EData(getApiByName(title)))
                     setE2EDataFetched(getApiByName(title))
                 }
@@ -81,8 +80,20 @@ const Products = ({ title }) => {
     ])
 
     useEffect(() => {
-        const modifiedData = e2eData.data.map((item) => ({ ...item, title }))
-        modifiedData.sort((a, b) => new Date(b.date) - new Date(a.date))
+        const modifiedData = e2eData.data.map((item: TestData) => ({
+            ...item,
+            title,
+        }))
+
+        modifiedData.sort((a: TestData, b: TestData) => {
+            // Convert date strings to Date objects for comparison
+            const dateA = new Date(a.date)
+            const dateB = new Date(b.date)
+
+            // Compare the dates
+            return dateB.getTime() - dateA.getTime()
+        })
+
         setData(modifiedData)
     }, [e2eData, title, value])
 
@@ -136,7 +147,6 @@ const Products = ({ title }) => {
                                         value={value}
                                         onChange={handleChange}
                                         aria-label="disabled tabs example"
-                                        selectionFollowsFocus="true"
                                     >
                                         <Tab label="Unit Test" />
                                         <Tab label="E2E Test" />
@@ -167,25 +177,18 @@ const Products = ({ title }) => {
     )
 }
 
-Products.propTypes = {
-    title: PropTypes.string,
-}
-
 export default Products
 
+interface TabPanelProps {
+    children: React.ReactNode
+    index: number
+    value: number
+}
 // TabPanel component
-function TabPanel(props) {
-    const { children, value, index } = props
-
+const TabPanel: React.FC<TabPanelProps> = ({ children, value, index }) => {
     return (
         <div role="tabpanel" hidden={value !== index}>
             {value === index && <Box>{children}</Box>}
         </div>
     )
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
 }
