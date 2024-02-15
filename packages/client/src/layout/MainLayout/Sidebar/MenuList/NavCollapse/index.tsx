@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
 import {
     Collapse,
@@ -11,31 +10,29 @@ import {
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { IconChevronDown, IconChevronUp } from '@tabler/icons'
-import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router'
-
 import NavItem from '../NavItem'
 
-const NavCollapse = ({ menu, level }) => {
+const NavCollapse = ({ menu, level }: { menu: MenuItem; level: number }) => {
     const theme = useTheme()
-    const customization = useSelector((state) => state.customization)
+    const customization = useSelector((state: any) => state.customization)
     const navigate = useNavigate()
 
     const [open, setOpen] = useState(false)
-    const [selected, setSelected] = useState(null)
+    const [selected, setSelected] = useState<string | null>(null)
 
     const handleClick = () => {
         setOpen(!open)
         setSelected(!selected ? menu.id : null)
-        if (menu?.id !== 'authentication') {
+        if (menu?.id !== 'authentication' && menu.children) {
             navigate(menu.children[0]?.url)
         }
     }
 
     const { pathname } = useLocation()
-    const checkOpenForParent = (child, id) => {
-        child.forEach((item) => {
+    const checkOpenForParent = (child: any, id: any) => {
+        child.forEach((item: any) => {
             if (item.url === pathname) {
                 setOpen(true)
                 setSelected(id)
@@ -48,7 +45,7 @@ const NavCollapse = ({ menu, level }) => {
         setOpen(false)
         setSelected(null)
         if (menu.children) {
-            menu.children.forEach((item) => {
+            menu.children.forEach((item: MenuItem) => {
                 if (item.children?.length) {
                     checkOpenForParent(item.children, menu.id)
                 }
@@ -63,7 +60,7 @@ const NavCollapse = ({ menu, level }) => {
     }, [pathname, menu.children])
 
     // menu collapse & item
-    const menus = menu.children?.map((item) => {
+    const menus = menu.children?.map((item: MenuItem) => {
         switch (item.type) {
             case 'collapse':
                 return (
@@ -182,11 +179,6 @@ const NavCollapse = ({ menu, level }) => {
             </Collapse>
         </>
     )
-}
-
-NavCollapse.propTypes = {
-    menu: PropTypes.object,
-    level: PropTypes.number,
 }
 
 export default NavCollapse

@@ -1,15 +1,14 @@
+import React from 'react'
 import { Divider, List, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
-
 import NavCollapse from '../NavCollapse'
 import NavItem from '../NavItem'
 
-const NavGroup = ({ item }) => {
+const NavGroup = ({ item }: { item: MenuItem }) => {
     const theme = useTheme()
 
     // menu list collapse & items
-    const items = item.children?.map((menu) => {
+    const items = item.children?.map((menu: MenuItem) => {
         switch (menu.type) {
             case 'collapse':
                 return <NavCollapse key={menu.id} menu={menu} level={1} />
@@ -62,10 +61,6 @@ const NavGroup = ({ item }) => {
             <Divider sx={{ mt: 0.25, mb: 1.25 }} />
         </>
     )
-}
-
-NavGroup.propTypes = {
-    item: PropTypes.object,
 }
 
 export default NavGroup
