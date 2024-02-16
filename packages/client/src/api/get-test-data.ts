@@ -1,4 +1,4 @@
-import commonAxios from './common'
+import commonAxios from './Common'
 
 export async function getE2EData(endpoint: string) {
     try {
