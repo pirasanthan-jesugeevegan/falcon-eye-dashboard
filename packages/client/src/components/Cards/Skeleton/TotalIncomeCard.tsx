@@ -1,11 +1,4 @@
-import {
-    Card,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    Skeleton,
-} from '@mui/material'
+import { Card, List, ListItem, ListItemAvatar, ListItemText, Skeleton } from '@mui/material'
 import React from 'react'
 
 const TotalIncomeCard = () => (

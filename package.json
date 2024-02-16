@@ -11,7 +11,8 @@
         "prettier-all": "prettier --write \"**/*{ts,js,css,html,jsx,tsx}\"",
         "client": "yarn workspace client start",
         "backend": "yarn workspace backend start",
-        "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn client\""
+        "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn client\"",
+        "fix:prettier": "prettier --write \"**/*.*\""
     },
     "devDependencies": {
         "concurrently": "^5.2.0",

@@ -12,10 +12,7 @@ export const jiraProxy = createProxyMiddleware({
         proxyReq.setHeader('User-Agent', '')
         proxyReq.setHeader(
             'Authorization',
-            'Basic ' +
-                Buffer.from(
-                    `${process.env.REACT_APP_USERNAME}:${process.env.REACT_APP_PASSWORD}`
-                ).toString('base64')
+            'Basic ' + Buffer.from(`${process.env.REACT_APP_USERNAME}:${process.env.REACT_APP_PASSWORD}`).toString('base64')
         )
     },
     onProxyRes: (proxyRes: any) => {

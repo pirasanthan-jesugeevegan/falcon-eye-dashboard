@@ -65,15 +65,11 @@ const MainRoutes = {
             children: [
                 {
                     path: 'coincover-b2b2c',
-                    element: (
-                        <SonarCloud title="List of Pull Request Results for coincover-b2b2c" />
-                    ),
+                    element: <SonarCloud title="List of Pull Request Results for coincover-b2b2c" />,
                 },
                 {
                     path: 'coincover-txm',
-                    element: (
-                        <SonarCloud title="List of Pull Request Results for coincover-txm" />
-                    ),
+                    element: <SonarCloud title="List of Pull Request Results for coincover-txm" />,
                 },
             ],
         },

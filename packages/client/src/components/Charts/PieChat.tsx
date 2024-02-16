@@ -1,13 +1,4 @@
-import {
-    Box,
-    Card,
-    CardContent,
-    CardHeader,
-    Stack,
-    SvgIcon,
-    Typography,
-    useTheme,
-} from '@mui/material'
+import { Box, Card, CardContent, CardHeader, Stack, SvgIcon, Typography, useTheme } from '@mui/material'
 import { IconBug, IconHeadphones, IconShieldLock } from '@tabler/icons'
 import ReactECharts from 'echarts-for-react'
 import JiraTicketSummaryCardSkeleton from 'components/Cards/Skeleton/JiraTicketSummaryCard'
@@ -37,18 +28,10 @@ const iconMap: Record<string, JSX.Element> = {
     ),
 }
 
-const OverviewTraffic: React.FC<OverviewTrafficProps> = ({
-    chartSeries,
-    labels,
-    sx,
-}) => {
+const OverviewTraffic: React.FC<OverviewTrafficProps> = ({ chartSeries, labels, sx }) => {
     const theme = useTheme()
     const chartOptions = {
-        color: [
-            theme.palette.primary.main,
-            theme.palette.secondary.main,
-            theme.palette.warning.main,
-        ],
+        color: [theme.palette.primary.main, theme.palette.secondary.main, theme.palette.warning.main],
         tooltip: {
             trigger: 'item',
         },
@@ -79,25 +62,14 @@ const OverviewTraffic: React.FC<OverviewTrafficProps> = ({
     }
     return (
         <>
-            {chartSeries &&
-            chartSeries.every((value) => value.value === undefined) ? (
+            {chartSeries && chartSeries.every((value) => value.value === undefined) ? (
                 <JiraTicketSummaryCardSkeleton />
             ) : (
-                <Card
-                    sx={{ ...sx, height: '100%', boxShadow: theme.shadows[10] }}
-                >
-                    <CardHeader
-                        title="Jira Ticket Summary"
-                        sx={{ padding: '14px', alignContent: 'center' }}
-                    />
+                <Card sx={{ ...sx, height: '100%', boxShadow: theme.shadows[10] }}>
+                    <CardHeader title="Jira Ticket Summary" sx={{ padding: '14px', alignContent: 'center' }} />
                     <CardContent sx={{ padding: '10px' }}>
                         <ReactECharts option={chartOptions} />
-                        <Stack
-                            alignItems="center"
-                            direction="row"
-                            justifyContent="center"
-                            spacing={4}
-                        >
+                        <Stack alignItems="center" direction="row" justifyContent="center" spacing={4}>
                             {chartSeries.map((item, index) => {
                                 const label = labels[index]
                                 return (
@@ -113,10 +85,7 @@ const OverviewTraffic: React.FC<OverviewTrafficProps> = ({
                                         <Typography sx={{ my: 1 }} variant="h4">
                                             {label}
                                         </Typography>
-                                        <Typography
-                                            color="text.secondary"
-                                            variant="subtitle1"
-                                        >
+                                        <Typography color="text.secondary" variant="subtitle1">
                                             {item.value}
                                         </Typography>
                                     </Box>

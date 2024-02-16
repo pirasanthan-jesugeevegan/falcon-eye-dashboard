@@ -14,11 +14,7 @@ interface SidebarProps {
     drawerToggle?: () => void
     window?: Window
 }
-const Sidebar: React.FC<SidebarProps> = ({
-    drawerOpen,
-    drawerToggle,
-    window,
-}) => {
+const Sidebar: React.FC<SidebarProps> = ({ drawerOpen, drawerToggle, window }) => {
     const theme = useTheme()
     const matchUpMd = useMediaQuery(theme.breakpoints.up('md'))
 
@@ -33,37 +29,26 @@ const Sidebar: React.FC<SidebarProps> = ({
                 <PerfectScrollbar
                     component="div"
                     style={{
-                        height: !matchUpMd
-                            ? 'calc(100vh - 56px)'
-                            : 'calc(100vh - 88px)',
+                        height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
                         paddingLeft: '16px',
                         paddingRight: '16px',
                     }}
                 >
                     <MenuList />
 
-                    <Stack
-                        direction="row"
-                        justifyContent="center"
-                        sx={{ mb: 2 }}
-                    ></Stack>
+                    <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}></Stack>
                 </PerfectScrollbar>
             </BrowserView>
             <MobileView>
                 <Box sx={{ px: 2 }}>
                     <MenuList />
-                    <Stack
-                        direction="row"
-                        justifyContent="center"
-                        sx={{ mb: 2 }}
-                    ></Stack>
+                    <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}></Stack>
                 </Box>
             </MobileView>
         </>
     )
 
-    const container =
-        window !== undefined ? () => window.document.body : undefined
+    const container = window !== undefined ? () => window.document.body : undefined
 
     return (
         <Box

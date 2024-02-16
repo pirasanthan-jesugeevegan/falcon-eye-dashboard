@@ -22,19 +22,7 @@ const linkSX = {
     alignItems: 'center',
 }
 
-const Breadcrumbs = ({
-    card,
-    divider,
-    icon,
-    icons,
-    maxItems,
-    navigation,
-    rightAlign,
-    separator,
-    title,
-    titleBottom,
-    ...others
-}) => {
+const Breadcrumbs = ({ card, divider, icon, icons, maxItems, navigation, rightAlign, separator, title, titleBottom, ...others }) => {
     const theme = useTheme()
 
     const iconStyle = {
@@ -55,10 +43,7 @@ const Breadcrumbs = ({
                 if (collapse.type && collapse.type === 'collapse') {
                     getCollapse(collapse)
                 } else if (collapse.type && collapse.type === 'item') {
-                    if (
-                        document.location.pathname ===
-                        config.basename + collapse.url
-                    ) {
+                    if (document.location.pathname === config.basename + collapse.url) {
                         setMain(menu)
                         setItem(collapse)
                     }
@@ -79,11 +64,7 @@ const Breadcrumbs = ({
 
     // item separator
     const SeparatorIcon = separator
-    const separatorIcon = separator ? (
-        <SeparatorIcon stroke={1.5} size="1rem" />
-    ) : (
-        <IconTallymark1 stroke={1.5} size="1rem" />
-    )
+    const separatorIcon = separator ? <SeparatorIcon stroke={1.5} size="1rem" /> : <IconTallymark1 stroke={1.5} size="1rem" />
 
     let mainContent
     let itemContent
@@ -129,14 +110,10 @@ const Breadcrumbs = ({
             breadcrumbContent = (
                 <Card
                     sx={{
-                        marginBottom:
-                            card === false ? 0 : theme.spacing(gridSpacing),
+                        marginBottom: card === false ? 0 : theme.spacing(gridSpacing),
                         border: card === false ? 'none' : '1px solid',
                         borderColor: theme.palette.primary[200] + 75,
-                        background:
-                            card === false
-                                ? 'transparent'
-                                : theme.palette.background.default,
+                        background: card === false ? 'transparent' : theme.palette.background.default,
                     }}
                     {...others}
                 >
@@ -144,18 +121,13 @@ const Breadcrumbs = ({
                         <Grid
                             container
                             direction={rightAlign ? 'row' : 'column'}
-                            justifyContent={
-                                rightAlign ? 'space-between' : 'flex-start'
-                            }
+                            justifyContent={rightAlign ? 'space-between' : 'flex-start'}
                             alignItems={rightAlign ? 'center' : 'flex-start'}
                             spacing={1}
                         >
                             {title && !titleBottom && (
                                 <Grid item>
-                                    <Typography
-                                        variant="h3"
-                                        sx={{ fontWeight: 500 }}
-                                    >
+                                    <Typography variant="h3" sx={{ fontWeight: 500 }}>
                                         {item.title}
                                     </Typography>
                                 </Grid>
@@ -173,21 +145,9 @@ const Breadcrumbs = ({
                                     maxItems={maxItems || 8}
                                     separator={separatorIcon}
                                 >
-                                    <Typography
-                                        component={Link}
-                                        to="/"
-                                        color="inherit"
-                                        variant="subtitle1"
-                                        sx={linkSX}
-                                    >
-                                        {icons && (
-                                            <HomeTwoToneIcon sx={iconStyle} />
-                                        )}
-                                        {icon && (
-                                            <HomeIcon
-                                                sx={{ ...iconStyle, mr: 0 }}
-                                            />
-                                        )}
+                                    <Typography component={Link} to="/" color="inherit" variant="subtitle1" sx={linkSX}>
+                                        {icons && <HomeTwoToneIcon sx={iconStyle} />}
+                                        {icon && <HomeIcon sx={{ ...iconStyle, mr: 0 }} />}
                                         {!icon && 'Dashboard'}
                                     </Typography>
                                     {mainContent}
@@ -196,10 +156,7 @@ const Breadcrumbs = ({
                             </Grid>
                             {title && titleBottom && (
                                 <Grid item>
-                                    <Typography
-                                        variant="h3"
-                                        sx={{ fontWeight: 500 }}
-                                    >
+                                    <Typography variant="h3" sx={{ fontWeight: 500 }}>
                                         {item.title}
                                     </Typography>
                                 </Grid>

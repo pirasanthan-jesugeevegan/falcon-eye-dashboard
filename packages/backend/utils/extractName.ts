@@ -1,7 +1,4 @@
-import {
-    ServiceAndProducts,
-    servicesAndProducts,
-} from 'shared/src/service-and-product-list'
+import { ServiceAndProducts, servicesAndProducts } from 'shared/src/service-and-product-list'
 
 const getTableName = (type: string, product: string): string | null => {
     if (type === 'e2e' || type === 'unit') {
@@ -11,9 +8,7 @@ const getTableName = (type: string, product: string): string | null => {
 }
 
 const getNameByApi = (value: string): string | null => {
-    const item: ServiceAndProducts | undefined = servicesAndProducts.find(
-        (item: ServiceAndProducts) => item.api === value
-    )
+    const item: ServiceAndProducts | undefined = servicesAndProducts.find((item: ServiceAndProducts) => item.api === value)
     return item ? item.name : null
 }
 

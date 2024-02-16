@@ -73,11 +73,9 @@ const TotalOrderLineChartCard = ({ isLoading }: { isLoading: boolean }) => {
                                         <Avatar
                                             variant="rounded"
                                             sx={{
-                                                ...theme.typography
-                                                    .commonAvatar,
+                                                ...theme.typography.commonAvatar,
                                                 ...theme.typography.largeAvatar,
-                                                backgroundColor:
-                                                    theme.palette.primary.dark,
+                                                backgroundColor: theme.palette.primary.dark,
                                                 color: '#fff',
                                                 mt: 1,
                                             }}
@@ -88,29 +86,19 @@ const TotalOrderLineChartCard = ({ isLoading }: { isLoading: boolean }) => {
                                     <Grid item>
                                         <Button
                                             disableElevation
-                                            variant={
-                                                timeValue ? 'contained' : 'text'
-                                            }
+                                            variant={timeValue ? 'contained' : 'text'}
                                             size="small"
                                             sx={{ color: 'inherit' }}
-                                            onClick={(e) =>
-                                                handleChangeTime(e, true)
-                                            }
+                                            onClick={(e) => handleChangeTime(e, true)}
                                         >
                                             Month
                                         </Button>
                                         <Button
                                             disableElevation
-                                            variant={
-                                                !timeValue
-                                                    ? 'contained'
-                                                    : 'text'
-                                            }
+                                            variant={!timeValue ? 'contained' : 'text'}
                                             size="small"
                                             sx={{ color: 'inherit' }}
-                                            onClick={(e) =>
-                                                handleChangeTime(e, false)
-                                            }
+                                            onClick={(e) => handleChangeTime(e, false)}
                                         >
                                             Year
                                         </Button>
@@ -125,8 +113,7 @@ const TotalOrderLineChartCard = ({ isLoading }: { isLoading: boolean }) => {
                                                 {timeValue ? (
                                                     <Typography
                                                         sx={{
-                                                            fontSize:
-                                                                '2.125rem',
+                                                            fontSize: '2.125rem',
                                                             fontWeight: 500,
                                                             mr: 1,
                                                             mt: 1.75,
@@ -138,8 +125,7 @@ const TotalOrderLineChartCard = ({ isLoading }: { isLoading: boolean }) => {
                                                 ) : (
                                                     <Typography
                                                         sx={{
-                                                            fontSize:
-                                                                '2.125rem',
+                                                            fontSize: '2.125rem',
                                                             fontWeight: 500,
                                                             mr: 1,
                                                             mt: 1.75,
@@ -153,21 +139,16 @@ const TotalOrderLineChartCard = ({ isLoading }: { isLoading: boolean }) => {
                                             <Grid item>
                                                 <Avatar
                                                     sx={{
-                                                        ...theme.typography
-                                                            .smallAvatar,
+                                                        ...theme.typography.smallAvatar,
                                                         cursor: 'pointer',
-                                                        backgroundColor:
-                                                            theme.palette
-                                                                .primary.light,
-                                                        color: theme.palette
-                                                            .primary.dark,
+                                                        backgroundColor: theme.palette.primary.light,
+                                                        color: theme.palette.primary.dark,
                                                     }}
                                                 >
                                                     <ArrowDownwardIcon
                                                         fontSize="inherit"
                                                         sx={{
-                                                            transform:
-                                                                'rotate3d(1, 1, 1, 45deg)',
+                                                            transform: 'rotate3d(1, 1, 1, 45deg)',
                                                         }}
                                                     />
                                                 </Avatar>
@@ -177,8 +158,7 @@ const TotalOrderLineChartCard = ({ isLoading }: { isLoading: boolean }) => {
                                                     sx={{
                                                         fontSize: '1rem',
                                                         fontWeight: 500,
-                                                        color: theme.palette
-                                                            .primary.light,
+                                                        color: theme.palette.primary.light,
                                                     }}
                                                 >
                                                     Total Order
@@ -187,11 +167,7 @@ const TotalOrderLineChartCard = ({ isLoading }: { isLoading: boolean }) => {
                                         </Grid>
                                     </Grid>
                                     <Grid item xs={6}>
-                                        {timeValue ? (
-                                            <Chart {...ChartDataMonth} />
-                                        ) : (
-                                            <Chart {...ChartDataYear} />
-                                        )}
+                                        {timeValue ? <Chart {...ChartDataMonth} /> : <Chart {...ChartDataYear} />}
                                     </Grid>
                                 </Grid>
                             </Grid>

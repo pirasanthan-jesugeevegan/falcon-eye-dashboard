@@ -37,33 +37,22 @@ const E2ETestStatusCard = ({ isLoading }: { isLoading: boolean }) => {
                     content={false}
                     sx={{
                         boxShadow: theme.shadows[10],
-                        backgroundColor:
-                            theme.palette.mode === 'dark' &&
-                            theme.palette.dark.dark,
+                        backgroundColor: theme.palette.mode === 'dark' && theme.palette.dark.dark,
                     }}
                 >
                     <CardContent>
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={12}>
-                                <Grid
-                                    container
-                                    alignContent="center"
-                                    justifyContent="space-between"
-                                >
+                                <Grid container alignContent="center" justifyContent="space-between">
                                     <Grid item>
-                                        <Typography variant="h4">
-                                            E2E Test Status
-                                        </Typography>
+                                        <Typography variant="h4">E2E Test Status</Typography>
                                     </Grid>
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
                                 {data?.map((product: ProductsOverviewData) => (
                                     <>
-                                        <Row
-                                            title={product.name}
-                                            data={product}
-                                        />
+                                        <Row title={product.name} data={product} />
                                         <Divider sx={{ my: 1.5 }} />
                                     </>
                                 ))}

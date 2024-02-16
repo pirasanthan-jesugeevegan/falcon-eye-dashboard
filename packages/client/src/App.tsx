@@ -8,9 +8,7 @@ import themes from 'themes'
 import React from 'react'
 
 const App = () => {
-    const customization = useSelector(
-        (state: ReduxState) => state.customization
-    )
+    const customization = useSelector((state: ReduxState) => state.customization)
     return (
         <StyledEngineProvider injectFirst>
             <ThemeProvider theme={themes(customization)}>

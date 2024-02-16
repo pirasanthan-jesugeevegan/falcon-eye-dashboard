@@ -12,35 +12,18 @@ const JiraTicketSummaryCardSkeleton = () => (
                     <Skeleton variant="circular" height={250} width={250} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Grid
-                        container
-                        alignItems="center"
-                        justifyContent="center"
-                        spacing={gridSpacing}
-                    >
+                    <Grid container alignItems="center" justifyContent="center" spacing={gridSpacing}>
                         <Grid item>
                             <Skeleton variant="text" width={50} />
-                            <Skeleton
-                                variant="rectangular"
-                                height={50}
-                                width={50}
-                            />
+                            <Skeleton variant="rectangular" height={50} width={50} />
                         </Grid>
                         <Grid item>
                             <Skeleton variant="text" width={50} />
-                            <Skeleton
-                                variant="rectangular"
-                                height={50}
-                                width={50}
-                            />
+                            <Skeleton variant="rectangular" height={50} width={50} />
                         </Grid>
                         <Grid item>
                             <Skeleton variant="text" width={50} />
-                            <Skeleton
-                                variant="rectangular"
-                                height={50}
-                                width={50}
-                            />
+                            <Skeleton variant="rectangular" height={50} width={50} />
                         </Grid>
                     </Grid>
                 </Grid>

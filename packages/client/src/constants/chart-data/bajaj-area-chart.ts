@@ -33,9 +33,7 @@ const generateChartData: any = (testResults: any) => {
         },
         series: [
             {
-                data: testResults.map(
-                    (result: any) => result.pass - result.fail
-                ),
+                data: testResults.map((result: any) => result.pass - result.fail),
             },
         ],
     }

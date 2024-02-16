@@ -10,8 +10,7 @@ import { projectToValue } from 'utils/name-converter'
 
 const SonarCloud = ({ title }: { title: string }) => {
     const [isLoading, setLoading] = useState(true)
-    const [sonarCloudPullRequest, setSonarCloudPullRequest] =
-        useState<SonarCloudData>({ pullRequests: [] })
+    const [sonarCloudPullRequest, setSonarCloudPullRequest] = useState<SonarCloudData>({ pullRequests: [] })
 
     const theme = useTheme()
 
@@ -19,9 +18,7 @@ const SonarCloud = ({ title }: { title: string }) => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const pullRequest = await getPullRequestData(
-                    projectToValue(title)
-                )
+                const pullRequest = await getPullRequestData(projectToValue(title))
                 setSonarCloudPullRequest(pullRequest)
             } catch (error) {
                 console.error('Error fetching data:', error)
@@ -39,14 +36,10 @@ const SonarCloud = ({ title }: { title: string }) => {
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
-                            {isLoading ||
-                            !sonarCloudPullRequest ||
-                            sonarCloudPullRequest.pullRequests.length === 0 ? (
+                            {isLoading || !sonarCloudPullRequest || sonarCloudPullRequest.pullRequests.length === 0 ? (
                                 <div>Loading...</div>
                             ) : (
-                                <SonarCloudTable
-                                    data={sonarCloudPullRequest.pullRequests}
-                                />
+                                <SonarCloudTable data={sonarCloudPullRequest.pullRequests} />
                             )}
                         </Grid>
                     </Grid>

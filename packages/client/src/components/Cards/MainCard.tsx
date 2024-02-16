@@ -1,11 +1,5 @@
 import React, { forwardRef } from 'react'
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    Divider,
-    Typography,
-} from '@mui/material'
+import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 interface MainCardProps {
@@ -54,9 +48,7 @@ const MainCard = forwardRef<HTMLDivElement, MainCardProps>(
                     border: border ? '1px solid' : 'none',
                     borderColor: theme.palette.primary.light + 25,
                     ':hover': {
-                        boxShadow: boxShadow
-                            ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)'
-                            : 'inherit',
+                        boxShadow: boxShadow ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)' : 'inherit',
                     },
                     ...sx,
                 }}
@@ -65,13 +57,7 @@ const MainCard = forwardRef<HTMLDivElement, MainCardProps>(
                 {title && (
                     <CardHeader
                         sx={headerSX}
-                        title={
-                            darkTitle ? (
-                                <Typography variant="h3">{title}</Typography>
-                            ) : (
-                                title
-                            )
-                        }
+                        title={darkTitle ? <Typography variant="h3">{title}</Typography> : title}
                         action={secondary}
                     />
                 )}

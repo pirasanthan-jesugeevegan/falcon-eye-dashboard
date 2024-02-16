@@ -58,12 +58,7 @@ const Avatar: React.FC<any> = ({ color, outline, size, sx, ...others }) => {
             sizeSX = {}
     }
 
-    return (
-        <MuiAvatar
-            sx={{ ...colorSX, ...outlineSX, ...sizeSX, ...sx }}
-            {...others}
-        />
-    )
+    return <MuiAvatar sx={{ ...colorSX, ...outlineSX, ...sizeSX, ...sx }} {...others} />
 }
 
 export default Avatar

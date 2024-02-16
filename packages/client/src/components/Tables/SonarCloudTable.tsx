@@ -55,65 +55,40 @@ const SonarCloudTable = ({ data }: { data: PullRequest[] }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data
-                            .slice(
-                                page * rowsPerPage,
-                                page * rowsPerPage + rowsPerPage
-                            )
-                            .map((d: PullRequest) => (
-                                <TableRow
-                                    key={d.key}
-                                    onClick={() => handleRowClick(d)}
-                                    hover
-                                    style={{ cursor: 'pointer' }}
-                                >
-                                    <TableCell>
-                                        <Typography
-                                            sx={{
-                                                fontWeight: 500,
-                                                mr: 1,
-                                                mt: 1.75,
-                                                mb: 0.75,
-                                            }}
-                                        >
-                                            <IconGitPullRequest /> {d.key} -{' '}
-                                            {d.title}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        {d.status.qualityGateStatus === 'OK' ? (
-                                            <IconSquareCheck color="#7bc62d" />
-                                        ) : (
-                                            <IconSquareX color="#ff4500" />
-                                        )}
-                                    </TableCell>
-                                    <TableCell>
-                                        <Tooltip title={d.commit?.author?.name}>
-                                            <Avatar
-                                                {...stringAvatar(
-                                                    d.commit?.author?.name
-                                                )}
-                                            />
-                                        </Tooltip>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Tooltip
-                                            title={moment(
-                                                d.analysisDate
-                                            ).format('MMMM Do YYYY, h:mm:ss a')}
-                                        >
-                                            <span>
-                                                {moment(d.analysisDate)
-                                                    .startOf('hour')
-                                                    .fromNow()}
-                                            </span>
-                                        </Tooltip>
-                                    </TableCell>
-                                    <TableCell>
-                                        {d.commit.sha.substring(0, 7)}
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                        {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((d: PullRequest) => (
+                            <TableRow key={d.key} onClick={() => handleRowClick(d)} hover style={{ cursor: 'pointer' }}>
+                                <TableCell>
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 500,
+                                            mr: 1,
+                                            mt: 1.75,
+                                            mb: 0.75,
+                                        }}
+                                    >
+                                        <IconGitPullRequest /> {d.key} - {d.title}
+                                    </Typography>
+                                </TableCell>
+                                <TableCell>
+                                    {d.status.qualityGateStatus === 'OK' ? (
+                                        <IconSquareCheck color="#7bc62d" />
+                                    ) : (
+                                        <IconSquareX color="#ff4500" />
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    <Tooltip title={d.commit?.author?.name}>
+                                        <Avatar {...stringAvatar(d.commit?.author?.name)} />
+                                    </Tooltip>
+                                </TableCell>
+                                <TableCell>
+                                    <Tooltip title={moment(d.analysisDate).format('MMMM Do YYYY, h:mm:ss a')}>
+                                        <span>{moment(d.analysisDate).startOf('hour').fromNow()}</span>
+                                    </Tooltip>
+                                </TableCell>
+                                <TableCell>{d.commit.sha.substring(0, 7)}</TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </TableContainer>

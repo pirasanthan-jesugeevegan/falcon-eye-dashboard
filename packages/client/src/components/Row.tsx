@@ -20,22 +20,14 @@ const Row = ({ title, data }: RowProps) => {
     return (
         <Grid container direction="column">
             <Grid item>
-                <Grid
-                    container
-                    alignItems="center"
-                    justifyContent="space-between"
-                >
+                <Grid container alignItems="center" justifyContent="space-between">
                     <Grid item>
                         <Typography variant="subtitle1" color="inherit">
                             {title}
                         </Typography>
                     </Grid>
                     <Grid item>
-                        <Grid
-                            container
-                            alignItems="center"
-                            justifyContent="space-between"
-                        >
+                        <Grid container alignItems="center" justifyContent="space-between">
                             <Grid item>
                                 <Typography variant="subtitle1" color="inherit">
                                     {status.toUpperCase()}
@@ -48,27 +40,15 @@ const Row = ({ title, data }: RowProps) => {
                                         width: 24,
                                         height: 24,
                                         borderRadius: '5px',
-                                        backgroundColor:
-                                            status === 'pass'
-                                                ? theme.palette.success.light
-                                                : theme.palette.orange.light,
-                                        color:
-                                            status === 'pass'
-                                                ? theme.palette.success.dark
-                                                : theme.palette.orange.dark,
+                                        backgroundColor: status === 'pass' ? theme.palette.success.light : theme.palette.orange.light,
+                                        color: status === 'pass' ? theme.palette.success.dark : theme.palette.orange.dark,
                                         ml: 2,
                                     }}
                                 >
                                     {status === 'pass' ? (
-                                        <ThumbUpAltIcon
-                                            fontSize="small"
-                                            color="inherit"
-                                        />
+                                        <ThumbUpAltIcon fontSize="small" color="inherit" />
                                     ) : (
-                                        <ThumbDownIcon
-                                            fontSize="small"
-                                            color="inherit"
-                                        />
+                                        <ThumbDownIcon fontSize="small" color="inherit" />
                                     )}
                                 </Avatar>
                             </Grid>
@@ -80,8 +60,7 @@ const Row = ({ title, data }: RowProps) => {
                 <Typography
                     variant="subtitle2"
                     sx={{
-                        color:
-                            status === 'pass' ? 'success.dark' : 'orange.dark',
+                        color: status === 'pass' ? 'success.dark' : 'orange.dark',
                     }}
                 >
                     {result}

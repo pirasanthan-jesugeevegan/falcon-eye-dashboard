@@ -1,11 +1,5 @@
 import React, { forwardRef, ReactNode } from 'react'
-import {
-    Card,
-    CardContent,
-    CardHeader,
-    Divider,
-    Typography,
-} from '@mui/material'
+import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 
 interface SubCardProps {
@@ -21,21 +15,7 @@ interface SubCardProps {
 }
 
 const SubCard = forwardRef<HTMLDivElement, SubCardProps>(
-    (
-        {
-            children,
-            content = true,
-            contentClass,
-            darkTitle,
-            secondary,
-            sx = {},
-            contentSX = {},
-            title,
-            action,
-            ...others
-        },
-        ref
-    ) => {
+    ({ children, content = true, contentClass, darkTitle, secondary, sx = {}, contentSX = {}, title, action, ...others }, ref) => {
         const theme = useTheme()
 
         return (
@@ -55,11 +35,7 @@ const SubCard = forwardRef<HTMLDivElement, SubCardProps>(
                 {title && (
                     <CardHeader
                         sx={{ p: 2.5 }}
-                        title={
-                            <Typography variant={darkTitle ? 'h4' : 'h5'}>
-                                {title}
-                            </Typography>
-                        }
+                        title={<Typography variant={darkTitle ? 'h4' : 'h5'}>{title}</Typography>}
                         action={action}
                     />
                 )}
@@ -76,10 +52,7 @@ const SubCard = forwardRef<HTMLDivElement, SubCardProps>(
 
                 {/* card content */}
                 {content && (
-                    <CardContent
-                        sx={{ p: 2.5, ...contentSX }}
-                        className={contentClass || ''}
-                    >
+                    <CardContent sx={{ p: 2.5, ...contentSX }} className={contentClass || ''}>
                         {children}
                     </CardContent>
                 )}

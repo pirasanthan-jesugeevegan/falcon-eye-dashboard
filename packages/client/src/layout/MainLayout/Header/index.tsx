@@ -19,10 +19,7 @@ const Header = ({ handleLeftDrawerToggle }: any) => {
                     },
                 }}
             >
-                <Box
-                    component="span"
-                    sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}
-                >
+                <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
                     <LogoSection />
                 </Box>
                 <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
@@ -32,14 +29,8 @@ const Header = ({ handleLeftDrawerToggle }: any) => {
                             ...theme.typography.commonAvatar,
                             ...theme.typography.mediumAvatar,
                             transition: 'all .2s ease-in-out',
-                            background:
-                                theme.palette.mode === 'light'
-                                    ? theme.palette.secondary.light
-                                    : theme.palette.dark.main,
-                            color:
-                                theme.palette.mode === 'light'
-                                    ? theme.palette.secondary.dark
-                                    : '#7c4dff',
+                            background: theme.palette.mode === 'light' ? theme.palette.secondary.light : theme.palette.dark.main,
+                            color: theme.palette.mode === 'light' ? theme.palette.secondary.dark : '#7c4dff',
                             '&:hover': {
                                 background: theme.palette.secondary.dark,
                                 color: theme.palette.secondary.light,

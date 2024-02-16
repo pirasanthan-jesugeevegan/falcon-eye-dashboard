@@ -29,16 +29,8 @@ const style = {
     boxShadow: 24,
     p: 4,
 }
-const E2ETestDataTable = ({
-    isLoading,
-    data,
-}: {
-    isLoading: boolean
-    data: TestData[]
-}) => {
-    const [selectedRowData, setSelectedRowData] = useState<TestData | null>(
-        null
-    )
+const E2ETestDataTable = ({ isLoading, data }: { isLoading: boolean; data: TestData[] }) => {
+    const [selectedRowData, setSelectedRowData] = useState<TestData | null>(null)
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
     const [page, setPage] = useState<number>(0)
     const [rowsPerPage, setRowsPerPage] = useState<number>(10)
@@ -69,10 +61,7 @@ const E2ETestDataTable = ({
                     <TableContainer
                         component={Paper}
                         sx={{
-                            backgroundColor:
-                                theme.palette.mode === 'dark'
-                                    ? theme.palette.dark.dark
-                                    : theme.palette.background.paper,
+                            backgroundColor: theme.palette.mode === 'dark' ? theme.palette.dark.dark : theme.palette.background.paper,
                             borderRadius: '5px',
                             boxShadow: theme.shadows[5],
                         }}
@@ -87,28 +76,14 @@ const E2ETestDataTable = ({
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {data
-                                    .slice(
-                                        page * rowsPerPage,
-                                        page * rowsPerPage + rowsPerPage
-                                    )
-                                    .map((d: any) => (
-                                        <TableRow
-                                            key={d.id}
-                                            onClick={() => handleRowClick(d)}
-                                            hover
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            <TableCell>
-                                                {moment(d.date).format(
-                                                    'DD/MM/YY'
-                                                )}
-                                            </TableCell>
-                                            <TableCell>{d.pass}</TableCell>
-                                            <TableCell>{d.fail}</TableCell>
-                                            <TableCell>{d.skip}</TableCell>
-                                        </TableRow>
-                                    ))}
+                                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((d: any) => (
+                                    <TableRow key={d.id} onClick={() => handleRowClick(d)} hover style={{ cursor: 'pointer' }}>
+                                        <TableCell>{moment(d.date).format('DD/MM/YY')}</TableCell>
+                                        <TableCell>{d.pass}</TableCell>
+                                        <TableCell>{d.fail}</TableCell>
+                                        <TableCell>{d.skip}</TableCell>
+                                    </TableRow>
+                                ))}
                             </TableBody>
                         </Table>
                     </TableContainer>
@@ -128,26 +103,11 @@ const E2ETestDataTable = ({
                             aria-describedby="modal-modal-description"
                         >
                             <Box sx={style}>
-                                <Typography
-                                    id="modal-modal-title"
-                                    variant="h3"
-                                    component="h2"
-                                >
-                                    {selectedRowData?.title} Test Run at{' '}
-                                    {moment(selectedRowData?.date).format(
-                                        'DD/MM/YY'
-                                    )}
+                                <Typography id="modal-modal-title" variant="h3" component="h2">
+                                    {selectedRowData?.title} Test Run at {moment(selectedRowData?.date).format('DD/MM/YY')}
                                 </Typography>
-                                <Typography
-                                    id="modal-modal-description"
-                                    sx={{ mt: 2 }}
-                                >
-                                    <iframe
-                                        src={selectedRowData?.report_url}
-                                        title="Modal Iframe"
-                                        width="100%"
-                                        height="600px"
-                                    ></iframe>
+                                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                    <iframe src={selectedRowData?.report_url} title="Modal Iframe" width="100%" height="600px"></iframe>
                                 </Typography>
                             </Box>
                         </Modal>
@@ -156,16 +116,12 @@ const E2ETestDataTable = ({
             ) : (
                 <MainCard
                     sx={{
-                        backgroundColor:
-                            theme.palette.mode === 'dark' &&
-                            theme.palette.dark.dark,
+                        backgroundColor: theme.palette.mode === 'dark' && theme.palette.dark.dark,
                         borderRadius: '5px',
                         boxShadow: theme.shadows[5],
                     }}
                 >
-                    <Typography sx={{ textAlign: 'center' }}>
-                        No Data
-                    </Typography>
+                    <Typography sx={{ textAlign: 'center' }}>No Data</Typography>
                 </MainCard>
             )}
         </>

@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import {
-    Collapse,
-    List,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-    Typography,
-} from '@mui/material'
+import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { IconChevronDown, IconChevronUp } from '@tabler/icons'
 import { useSelector } from 'react-redux'
@@ -63,19 +56,12 @@ const NavCollapse = ({ menu, level }: { menu: MenuItem; level: number }) => {
     const menus = menu.children?.map((item: MenuItem) => {
         switch (item.type) {
             case 'collapse':
-                return (
-                    <NavCollapse key={item.id} menu={item} level={level + 1} />
-                )
+                return <NavCollapse key={item.id} menu={item} level={level + 1} />
             case 'item':
                 return <NavItem key={item.id} item={item} level={level + 1} />
             default:
                 return (
-                    <Typography
-                        key={item.id}
-                        variant="h6"
-                        color="error"
-                        align="center"
-                    >
+                    <Typography key={item.id} variant="h6" color="error" align="center">
                         Menu Items Error
                     </Typography>
                 )
@@ -84,11 +70,7 @@ const NavCollapse = ({ menu, level }: { menu: MenuItem; level: number }) => {
 
     const Icon = menu.icon
     const menuIcon = menu.icon ? (
-        <Icon
-            strokeWidth={1.5}
-            size="1.3rem"
-            style={{ marginTop: 'auto', marginBottom: 'auto' }}
-        />
+        <Icon strokeWidth={1.5} size="1.3rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
     ) : (
         <FiberManualRecordIcon
             sx={{
@@ -106,54 +88,32 @@ const NavCollapse = ({ menu, level }: { menu: MenuItem; level: number }) => {
                     borderRadius: `${customization.borderRadius}px`,
                     mb: 0.5,
                     alignItems: 'flex-start',
-                    backgroundColor:
-                        level > 1 ? 'transparent !important' : 'inherit',
+                    backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
                     py: level > 1 ? 1 : 1.25,
                     pl: `${level * 24}px`,
                 }}
                 selected={selected === menu.id}
                 onClick={handleClick}
             >
-                <ListItemIcon
-                    sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}
-                >
-                    {menuIcon}
-                </ListItemIcon>
+                <ListItemIcon sx={{ my: 'auto', minWidth: !menu.icon ? 18 : 36 }}>{menuIcon}</ListItemIcon>
                 <ListItemText
                     primary={
-                        <Typography
-                            variant={selected === menu.id ? 'h5' : 'body1'}
-                            color="inherit"
-                            sx={{ my: 'auto' }}
-                        >
+                        <Typography variant={selected === menu.id ? 'h5' : 'body1'} color="inherit" sx={{ my: 'auto' }}>
                             {menu.title}
                         </Typography>
                     }
                     secondary={
                         menu.caption && (
-                            <Typography
-                                variant="caption"
-                                sx={{ ...theme.typography.subMenuCaption }}
-                                display="block"
-                                gutterBottom
-                            >
+                            <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
                                 {menu.caption}
                             </Typography>
                         )
                     }
                 />
                 {open ? (
-                    <IconChevronUp
-                        stroke={1.5}
-                        size="1rem"
-                        style={{ marginTop: 'auto', marginBottom: 'auto' }}
-                    />
+                    <IconChevronUp stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
                 ) : (
-                    <IconChevronDown
-                        stroke={1.5}
-                        size="1rem"
-                        style={{ marginTop: 'auto', marginBottom: 'auto' }}
-                    />
+                    <IconChevronDown stroke={1.5} size="1rem" style={{ marginTop: 'auto', marginBottom: 'auto' }} />
                 )}
             </ListItemButton>
             <Collapse in={open} timeout="auto" unmountOnExit>

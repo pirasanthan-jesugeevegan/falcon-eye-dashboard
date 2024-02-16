@@ -5,11 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import MainCard from '../components/Cards/MainCard'
 import JiraTable from '../components/Tables/JiraTable'
 import { gridSpacing } from '../redux/constants'
-import {
-    getJiraBugData,
-    getJiraDefectData,
-    getJiraSecurityData,
-} from '../redux/selectors'
+import { getJiraBugData, getJiraDefectData, getJiraSecurityData } from '../redux/selectors'
 import { retrieveJiraData } from '../redux/thunks/jira'
 
 const Products = ({ title }: { title: string }) => {
@@ -67,19 +63,12 @@ const Products = ({ title }: { title: string }) => {
     return (
         <>
             {data?.issues?.length > 0 ? (
-                <MainCard
-                    title={`List of Open ${title} issues`}
-                    sx={{ boxShadow: theme.shadows[6] }}
-                >
+                <MainCard title={`List of Open ${title} issues`} sx={{ boxShadow: theme.shadows[6] }}>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12}>
                             <Grid container spacing={gridSpacing}>
                                 <Grid item xs={12} sm={12} md={12} lg={12}>
-                                    {isLoading ? (
-                                        <div>Loading...</div>
-                                    ) : (
-                                        <JiraTable data={data.issues} />
-                                    )}
+                                    {isLoading ? <div>Loading...</div> : <JiraTable data={data.issues} />}
                                 </Grid>
                             </Grid>
                         </Grid>
@@ -87,9 +76,7 @@ const Products = ({ title }: { title: string }) => {
                 </MainCard>
             ) : (
                 <MainCard sx={{ boxShadow: theme.shadows[6] }}>
-                    <Typography sx={{ textAlign: 'center' }}>
-                        No Data
-                    </Typography>
+                    <Typography sx={{ textAlign: 'center' }}>No Data</Typography>
                 </MainCard>
             )}
         </>

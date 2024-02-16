@@ -27,9 +27,7 @@ const IOSSwitch = styled(Switch)(({ theme }) => ({
             transform: 'translateX(16px)',
             color: '#fff',
             '& + .MuiSwitch-track': {
-                backgroundColor:
-                    theme.palette.mode === 'dark' &&
-                    theme.palette.secondary.dark,
+                backgroundColor: theme.palette.mode === 'dark' && theme.palette.secondary.dark,
                 opacity: 1,
                 border: 0,
             },
@@ -47,10 +45,7 @@ const IOSSwitch = styled(Switch)(({ theme }) => ({
             border: '6px solid #fff',
         },
         '&.Mui-disabled .MuiSwitch-thumb': {
-            color:
-                theme.palette.mode === 'light'
-                    ? theme.palette.grey[100]
-                    : theme.palette.grey[600],
+            color: theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[600],
         },
     },
     '& .MuiSwitch-thumb': {
@@ -88,9 +83,7 @@ const IOSSwitch = styled(Switch)(({ theme }) => ({
 const ThemeSection = () => {
     const theme = useTheme()
     const dispatch = useDispatch()
-    const customization = useSelector(
-        (state: ReduxState) => state.customization
-    )
+    const customization = useSelector((state: ReduxState) => state.customization)
 
     const [themeMode, setThemeMode] = useState(customization.theme)
 
@@ -110,11 +103,7 @@ const ThemeSection = () => {
                 },
             }}
         >
-            <IOSSwitch
-                checked={themeMode === 'dark'}
-                onChange={handleTheme}
-                sx={{ m: 1 }}
-            />
+            <IOSSwitch checked={themeMode === 'dark'} onChange={handleTheme} sx={{ m: 1 }} />
         </Box>
     )
 }

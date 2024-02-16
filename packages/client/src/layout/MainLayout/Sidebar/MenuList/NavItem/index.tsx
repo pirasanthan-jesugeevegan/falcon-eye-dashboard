@@ -1,14 +1,6 @@
 import React, { forwardRef, useEffect } from 'react'
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord'
-import {
-    Avatar,
-    Chip,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
-    Typography,
-    useMediaQuery,
-} from '@mui/material'
+import { Avatar, Chip, ListItemButton, ListItemIcon, ListItemText, Typography, useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
@@ -27,18 +19,8 @@ const NavItem = ({ item, level }: { item: MenuItem; level: number }) => {
     ) : (
         <FiberManualRecordIcon
             sx={{
-                width:
-                    customization.isOpen.findIndex(
-                        (id: string) => id === item?.id
-                    ) > -1
-                        ? 8
-                        : 6,
-                height:
-                    customization.isOpen.findIndex(
-                        (id: string) => id === item?.id
-                    ) > -1
-                        ? 8
-                        : 6,
+                width: customization.isOpen.findIndex((id: string) => id === item?.id) > -1 ? 8 : 6,
+                height: customization.isOpen.findIndex((id: string) => id === item?.id) > -1 ? 8 : 6,
             }}
             fontSize={level > 0 ? 'inherit' : 'medium'}
         />
@@ -47,14 +29,7 @@ const NavItem = ({ item, level }: { item: MenuItem; level: number }) => {
     let itemTarget = '_self'
 
     let listItemProps = {
-        component: forwardRef<HTMLAnchorElement>((props, ref) => (
-            <RouterLink
-                ref={ref}
-                {...props}
-                to={item.url}
-                target={itemTarget}
-            />
-        )),
+        component: forwardRef<HTMLAnchorElement>((props, ref) => <RouterLink ref={ref} {...props} to={item.url} target={itemTarget} />),
     }
 
     const itemHandler = (id: string) => {
@@ -82,30 +57,18 @@ const NavItem = ({ item, level }: { item: MenuItem; level: number }) => {
                 borderRadius: `${customization.borderRadius}px`,
                 mb: 0.5,
                 alignItems: 'flex-start',
-                backgroundColor:
-                    level > 1 ? 'transparent !important' : 'inherit',
+                backgroundColor: level > 1 ? 'transparent !important' : 'inherit',
                 py: level > 1 ? 1 : 1.25,
                 pl: `${level * 24}px`,
             }}
-            selected={
-                customization.isOpen.findIndex((id: string) => id === item.id) >
-                -1
-            }
+            selected={customization.isOpen.findIndex((id: string) => id === item.id) > -1}
             onClick={() => itemHandler(item.id)}
         >
-            <ListItemIcon sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>
-                {itemIcon}
-            </ListItemIcon>
+            <ListItemIcon sx={{ my: 'auto', minWidth: !item?.icon ? 18 : 36 }}>{itemIcon}</ListItemIcon>
             <ListItemText
                 primary={
                     <Typography
-                        variant={
-                            customization.isOpen.findIndex(
-                                (id: string) => id === item.id
-                            ) > -1
-                                ? 'h5'
-                                : 'body1'
-                        }
+                        variant={customization.isOpen.findIndex((id: string) => id === item.id) > -1 ? 'h5' : 'body1'}
                         color="inherit"
                     >
                         {item.title}
@@ -113,12 +76,7 @@ const NavItem = ({ item, level }: { item: MenuItem; level: number }) => {
                 }
                 secondary={
                     item.caption && (
-                        <Typography
-                            variant="caption"
-                            sx={{ ...theme.typography.subMenuCaption }}
-                            display="block"
-                            gutterBottom
-                        >
+                        <Typography variant="caption" sx={{ ...theme.typography.subMenuCaption }} display="block" gutterBottom>
                             {item.caption}
                         </Typography>
                     )
@@ -130,9 +88,7 @@ const NavItem = ({ item, level }: { item: MenuItem; level: number }) => {
                     variant={item.chip.variant}
                     size={item.chip.size}
                     label={item.chip.label}
-                    avatar={
-                        item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>
-                    }
+                    avatar={item.chip.avatar && <Avatar>{item.chip.avatar}</Avatar>}
                 />
             )}
         </ListItemButton>

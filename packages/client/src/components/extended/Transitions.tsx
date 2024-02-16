@@ -4,28 +4,13 @@ import { Box, Collapse, Fade, Grow, Slide, Zoom } from '@mui/material'
 interface TransitionsProps {
     children?: React.ReactNode
     type?: 'grow' | 'fade' | 'collapse' | 'slide' | 'zoom'
-    position?:
-        | 'top-left'
-        | 'top-right'
-        | 'top'
-        | 'bottom-left'
-        | 'bottom-right'
-        | 'bottom'
+    position?: 'top-left' | 'top-right' | 'top' | 'bottom-left' | 'bottom-right' | 'bottom'
     direction?: 'up' | 'down' | 'left' | 'right'
     in?: boolean
 }
 
 const Transitions = forwardRef<HTMLDivElement, TransitionsProps>(
-    (
-        {
-            children,
-            position = 'top-left',
-            direction = 'up',
-            type = 'grow',
-            ...others
-        },
-        ref
-    ) => {
+    ({ children, position = 'top-left', direction = 'up', type = 'grow', ...others }, ref) => {
         let positionSX: React.CSSProperties = {
             transformOrigin: '0 0 0',
         }

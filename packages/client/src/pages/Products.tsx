@@ -28,18 +28,12 @@ const Products = ({ title }: { title: string }) => {
     const getTestPercentage = (pass: number, fail: number, skip: number) => {
         const totalTests = pass + fail + skip
         const passPercentage = (((pass + skip) / totalTests) * 100).toFixed(0)
-        const overallResult = isNaN(Number(passPercentage))
-            ? 'No Data'
-            : `${passPercentage}%`
+        const overallResult = isNaN(Number(passPercentage)) ? 'No Data' : `${passPercentage}%`
         return overallResult
     }
 
     const lastItem = data[data.length - 1]
-    const percentageData = getTestPercentage(
-        lastItem?.pass,
-        lastItem?.fail,
-        lastItem?.skip
-    )
+    const percentageData = getTestPercentage(lastItem?.pass, lastItem?.fail, lastItem?.skip)
 
     const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
         setValue(newValue)
@@ -69,15 +63,7 @@ const Products = ({ title }: { title: string }) => {
         }
 
         fetchData()
-    }, [
-        dispatch,
-        title,
-        e2eData,
-        isE2EDataFetched,
-        isUnitDataFetched,
-        unitData,
-        value,
-    ])
+    }, [dispatch, title, e2eData, isE2EDataFetched, isUnitDataFetched, unitData, value])
 
     useEffect(() => {
         const modifiedData = e2eData.data.map((item: TestData) => ({
@@ -98,10 +84,7 @@ const Products = ({ title }: { title: string }) => {
     }, [e2eData, title, value])
 
     return (
-        <MainCard
-            title={`${value === 0 ? 'Unit' : 'E2E'} Test Result: ${title}`}
-            sx={{ boxShadow: theme.shadows[6] }}
-        >
+        <MainCard title={`${value === 0 ? 'Unit' : 'E2E'} Test Result: ${title}`} sx={{ boxShadow: theme.shadows[6] }}>
             <Grid container spacing={gridSpacing}>
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
@@ -118,11 +101,7 @@ const Products = ({ title }: { title: string }) => {
                             <SmallCard
                                 isLoading={isLoading}
                                 title="Latest Unit Run"
-                                result={
-                                    unitData.data[0]?.result[0]?.percentage
-                                        ? `${unitData.data[0]?.result[0]?.percentage}%`
-                                        : 'No Data'
-                                }
+                                result={unitData.data[0]?.result[0]?.percentage ? `${unitData.data[0]?.result[0]?.percentage}%` : 'No Data'}
                                 icon={<FingerprintIcon fontSize="inherit" />}
                                 backgroundColor="secondary"
                             />
@@ -143,34 +122,16 @@ const Products = ({ title }: { title: string }) => {
                                         bgcolor: 'background.paper',
                                     }}
                                 >
-                                    <Tabs
-                                        value={value}
-                                        onChange={handleChange}
-                                        aria-label="disabled tabs example"
-                                    >
+                                    <Tabs value={value} onChange={handleChange} aria-label="disabled tabs example">
                                         <Tab label="Unit Test" />
                                         <Tab label="E2E Test" />
                                     </Tabs>
                                 </Box>
                                 <TabPanel value={value} index={0}>
-                                    {isLoading ? (
-                                        <div>Loading...</div>
-                                    ) : (
-                                        <UnitTestDataTable
-                                            data={unitData.data}
-                                            isLoading={isLoading}
-                                        />
-                                    )}
+                                    {isLoading ? <div>Loading...</div> : <UnitTestDataTable data={unitData.data} isLoading={isLoading} />}
                                 </TabPanel>
                                 <TabPanel value={value} index={1}>
-                                    {isLoading ? (
-                                        <div>Loading...</div>
-                                    ) : (
-                                        <E2ETestDataTable
-                                            data={e2eData.data}
-                                            isLoading={isLoading}
-                                        />
-                                    )}
+                                    {isLoading ? <div>Loading...</div> : <E2ETestDataTable data={e2eData.data} isLoading={isLoading} />}
                                 </TabPanel>
                             </>
                         </Grid>

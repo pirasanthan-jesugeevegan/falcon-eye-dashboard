@@ -1,12 +1,4 @@
-import {
-    Avatar,
-    Box,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    Typography,
-} from '@mui/material'
+import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
 import React from 'react'
 import MainCard from './MainCard'
@@ -21,59 +13,40 @@ interface SmallCardProps {
     backgroundColor?: string
 }
 
-const CardWrapper = styled(MainCard)<{ backgroundColor?: any }>(
-    ({ theme, backgroundColor }) => ({
-        backgroundColor:
-            theme.palette.mode === 'light'
-                ? backgroundColor && backgroundColor.dark
-                : theme.palette.dark.dark,
-        color: backgroundColor && backgroundColor.light,
-        overflow: 'hidden',
-        position: 'relative',
-        '&:after': {
-            content: '""',
-            position: 'absolute',
-            width: 210,
-            height: 210,
-            background: `linear-gradient(210.04deg, ${
-                backgroundColor
-                    ? backgroundColor[200]
-                    : theme.palette.warning.dark
-            } -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
-            borderRadius: '50%',
-            top: -30,
-            right: -180,
-        },
-        '&:before': {
-            content: '""',
-            position: 'absolute',
-            width: 210,
-            height: 210,
-            background: `linear-gradient(140.9deg, ${
-                backgroundColor
-                    ? backgroundColor[200]
-                    : theme.palette.warning.dark
-            } -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
-            borderRadius: '50%',
-            top: -160,
-            right: -130,
-        },
-    })
-)
+const CardWrapper = styled(MainCard)<{ backgroundColor?: any }>(({ theme, backgroundColor }) => ({
+    backgroundColor: theme.palette.mode === 'light' ? backgroundColor && backgroundColor.dark : theme.palette.dark.dark,
+    color: backgroundColor && backgroundColor.light,
+    overflow: 'hidden',
+    position: 'relative',
+    '&:after': {
+        content: '""',
+        position: 'absolute',
+        width: 210,
+        height: 210,
+        background: `linear-gradient(210.04deg, ${
+            backgroundColor ? backgroundColor[200] : theme.palette.warning.dark
+        } -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
+        borderRadius: '50%',
+        top: -30,
+        right: -180,
+    },
+    '&:before': {
+        content: '""',
+        position: 'absolute',
+        width: 210,
+        height: 210,
+        background: `linear-gradient(140.9deg, ${
+            backgroundColor ? backgroundColor[200] : theme.palette.warning.dark
+        } -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
+        borderRadius: '50%',
+        top: -160,
+        right: -130,
+    },
+}))
 
-const SmallCard: React.FC<SmallCardProps> = ({
-    isLoading,
-    title,
-    subtitle,
-    result,
-    icon,
-    backgroundColor,
-}) => {
+const SmallCard: React.FC<SmallCardProps> = ({ isLoading, title, subtitle, result, icon, backgroundColor }) => {
     const theme = useTheme()
-    const resultColor = (
-        backgroundColor: string | undefined,
-        result: string | undefined
-    ) => {
+    const resultColor = (backgroundColor: string | undefined, result: string | undefined) => {
         if (result === 'OK') {
             return theme.palette.success.main
         } else if (result === 'ERROR') {
@@ -101,19 +74,12 @@ const SmallCard: React.FC<SmallCardProps> = ({
                 <CardWrapper
                     border={false}
                     content={false}
-                    backgroundColor={backgroundColorPicker(
-                        backgroundColor,
-                        theme
-                    )}
+                    backgroundColor={backgroundColorPicker(backgroundColor, theme)}
                     sx={{ boxShadow: theme.shadows[10] }}
                 >
                     <Box sx={{ p: 2 }}>
                         <List sx={{ py: 0 }}>
-                            <ListItem
-                                alignItems="center"
-                                disableGutters
-                                sx={{ py: 0 }}
-                            >
+                            <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
                                 <ListItemAvatar>
                                     <Avatar
                                         variant="rounded"
@@ -123,16 +89,10 @@ const SmallCard: React.FC<SmallCardProps> = ({
                                             backgroundColor:
                                                 theme.palette.mode === 'light'
                                                     ? backgroundColor
-                                                        ? backgroundColorPicker(
-                                                              backgroundColor,
-                                                              theme
-                                                          )[800]
-                                                        : theme.palette.warning
-                                                              .light
+                                                        ? backgroundColorPicker(backgroundColor, theme)[800]
+                                                        : theme.palette.warning.light
                                                     : theme.palette.dark.main,
-                                            color: backgroundColor
-                                                ? '#fff'
-                                                : theme.palette.warning.dark,
+                                            color: backgroundColor ? '#fff' : theme.palette.warning.dark,
                                         }}
                                     >
                                         {icon}
@@ -148,8 +108,7 @@ const SmallCard: React.FC<SmallCardProps> = ({
                                         <Typography
                                             variant="h4"
                                             sx={{
-                                                color:
-                                                    backgroundColor && '#fff',
+                                                color: backgroundColor && '#fff',
                                             }}
                                         >
                                             {title}
@@ -159,9 +118,7 @@ const SmallCard: React.FC<SmallCardProps> = ({
                                         <Typography
                                             variant="subtitle2"
                                             sx={{
-                                                color: backgroundColor
-                                                    ? 'primary.light'
-                                                    : theme.palette.grey[500],
+                                                color: backgroundColor ? 'primary.light' : theme.palette.grey[500],
                                                 mt: 0.25,
                                             }}
                                         >
@@ -172,10 +129,7 @@ const SmallCard: React.FC<SmallCardProps> = ({
                                 <Typography
                                     variant="h2"
                                     sx={{
-                                        color: resultColor(
-                                            backgroundColor,
-                                            result
-                                        ),
+                                        color: resultColor(backgroundColor, result),
                                     }}
                                 >
                                     {result}

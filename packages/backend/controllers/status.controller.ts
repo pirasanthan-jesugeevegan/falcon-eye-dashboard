@@ -12,18 +12,13 @@ export default class StatusController {
                 const tableName = getTableName('e2e', product.api)
 
                 if (!tableName) {
-                    return res
-                        .status(400)
-                        .json({ error: 'Invalid type or product' })
+                    return res.status(400).json({ error: 'Invalid type or product' })
                 }
 
                 const latestTestResult = await queries.getLastResult(tableName)
 
                 if (latestTestResult) {
-                    totalTests +=
-                        latestTestResult.pass +
-                        latestTestResult.fail +
-                        latestTestResult.skip
+                    totalTests += latestTestResult.pass + latestTestResult.fail + latestTestResult.skip
                 }
             }
 
@@ -43,9 +38,7 @@ export default class StatusController {
                 const tableName = getTableName('e2e', product.api)
 
                 if (!tableName) {
-                    return res
-                        .status(400)
-                        .json({ error: 'Invalid type or product' })
+                    return res.status(400).json({ error: 'Invalid type or product' })
                 }
 
                 const lastResult = await queries.getLastResult(tableName)
@@ -58,13 +51,9 @@ export default class StatusController {
                     })
                 } else {
                     const overallStatus = lastResult.fail > 0 ? 'fail' : 'pass'
-                    const totalTests =
-                        lastResult.pass + lastResult.fail + lastResult.skip
+                    const totalTests = lastResult.pass + lastResult.fail + lastResult.skip
 
-                    const passPercentage = (
-                        ((lastResult.pass + lastResult.skip) / totalTests) *
-                        100
-                    ).toFixed(0)
+                    const passPercentage = (((lastResult.pass + lastResult.skip) / totalTests) * 100).toFixed(0)
                     const overallResult = `${passPercentage}% test pass`
 
                     results.push({

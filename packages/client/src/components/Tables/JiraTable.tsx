@@ -1,25 +1,11 @@
 import React from 'react'
-import {
-    Avatar,
-    Chip,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow,
-    Tooltip,
-    Typography,
-} from '@mui/material'
+import { Avatar, Chip, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import moment from 'moment'
 
 const JiraTable = ({ data }: { data: Issue[] }) => {
     const handleRowClick = (rowData: Issue) => {
-        window.open(
-            `https://coincover.atlassian.net/browse/${rowData.key}`,
-            '_blank'
-        )
+        window.open(`https://coincover.atlassian.net/browse/${rowData.key}`, '_blank')
     }
 
     return (
@@ -70,48 +56,18 @@ const JiraTable = ({ data }: { data: Issue[] }) => {
                                     />
                                 </TableCell>
                                 <TableCell>
-                                    <Tooltip
-                                        title={
-                                            d.fields?.assignee?.displayName ||
-                                            'Not assigned'
-                                        }
-                                    >
-                                        <Avatar
-                                            alt={
-                                                d.fields?.assignee?.displayName
-                                            }
-                                            src={
-                                                d.fields?.assignee?.avatarUrls[
-                                                    '48x48'
-                                                ]
-                                            }
-                                        />
+                                    <Tooltip title={d.fields?.assignee?.displayName || 'Not assigned'}>
+                                        <Avatar alt={d.fields?.assignee?.displayName} src={d.fields?.assignee?.avatarUrls['48x48']} />
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
-                                    <Tooltip
-                                        title={moment(d.fields.created).format(
-                                            'MMMM Do YYYY, h:mm:ss a'
-                                        )}
-                                    >
-                                        <span>
-                                            {moment(d.fields.created)
-                                                .startOf('hour')
-                                                .fromNow()}
-                                        </span>
+                                    <Tooltip title={moment(d.fields.created).format('MMMM Do YYYY, h:mm:ss a')}>
+                                        <span>{moment(d.fields.created).startOf('hour').fromNow()}</span>
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>
-                                    <Tooltip
-                                        title={moment(d.fields.updated).format(
-                                            'MMMM Do YYYY, h:mm:ss a'
-                                        )}
-                                    >
-                                        <span>
-                                            {moment(d.fields.updated)
-                                                .startOf('hour')
-                                                .fromNow()}
-                                        </span>
+                                    <Tooltip title={moment(d.fields.updated).format('MMMM Do YYYY, h:mm:ss a')}>
+                                        <span>{moment(d.fields.updated).startOf('hour').fromNow()}</span>
                                     </Tooltip>
                                 </TableCell>
                             </TableRow>

@@ -1,7 +1,7 @@
 /* eslint-disable */
-const path = require('path');
-const fs = require('fs');
-const { override, babelInclude } = require('customize-cra');
+const path = require('path')
+const fs = require('fs')
+const { override, babelInclude } = require('customize-cra')
 module.exports = (config, env) => {
     return Object.assign(
         config,
@@ -12,5 +12,5 @@ module.exports = (config, env) => {
                 fs.realpathSync('../shared/src'), // THIS
             ])
         )(config, env)
-    );
-};
+    )
+}

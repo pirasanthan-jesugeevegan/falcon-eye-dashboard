@@ -2,12 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FingerprintIcon from '@mui/icons-material/Fingerprint'
 import SupportIcon from '@mui/icons-material/Support'
 import { Grid } from '@mui/material'
-import {
-    IconBug,
-    IconHeadphones,
-    IconShieldLock,
-    IconTicket,
-} from '@tabler/icons'
+import { IconBug, IconHeadphones, IconShieldLock, IconTicket } from '@tabler/icons'
 import { useDispatch, useSelector } from 'react-redux'
 // import { OverviewTraffic } from 'components/Charts/PieChat';
 // import TotalOrderLineChartCard from '../components/Cards/TotalOrderLineChartCard';
@@ -19,11 +14,7 @@ import PopularCard from '../components/Cards/E2ETestStatusCard'
 import LargeCard from '../components/Cards/LargeCard'
 import SmallCard from '../components/Cards/SmallCard'
 import { gridSpacing } from '../redux/constants'
-import {
-    getJiraBugData,
-    getJiraDefectData,
-    getJiraSecurityData,
-} from '../redux/selectors'
+import { getJiraBugData, getJiraDefectData, getJiraSecurityData } from '../redux/selectors'
 import { retrieveJiraData } from '../redux/thunks/jira'
 
 const Dashboard = () => {
@@ -37,12 +28,8 @@ const Dashboard = () => {
     const [defect, setDefect] = useState<IssueResponse>(jiraDefectData)
     const [security, setSecurity] = useState<IssueResponse>(jiraSecurityData)
     const [data, setData] = useState<any>([])
-    const [b2b2cSonarCloudStatusData, setB2b2cSonarCloudStatusData] = useState<
-        ProjectStatusData | []
-    >([])
-    const [txmSonarCloudStatusData, setTxmSonarCloudStatusData] = useState<
-        ProjectStatusData | []
-    >([])
+    const [b2b2cSonarCloudStatusData, setB2b2cSonarCloudStatusData] = useState<ProjectStatusData | []>([])
+    const [txmSonarCloudStatusData, setTxmSonarCloudStatusData] = useState<ProjectStatusData | []>([])
     const [isLoading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
@@ -69,12 +56,8 @@ const Dashboard = () => {
                     )
                 }
 
-                const b2b2cSonarCloudStatus = await getProjectStatusData(
-                    'coincover_coincover-b2b2c'
-                )
-                const txmSonarCloudStatus = await getProjectStatusData(
-                    'coincover_coincover-txm'
-                )
+                const b2b2cSonarCloudStatus = await getProjectStatusData('coincover_coincover-b2b2c')
+                const txmSonarCloudStatus = await getProjectStatusData('coincover_coincover-txm')
 
                 setData(result)
 
@@ -149,12 +132,7 @@ const Dashboard = () => {
                                 isLoading={isLoading}
                                 title="coincover-b2b2c"
                                 subtitle="SonarCloud"
-                                result={
-                                    Array.isArray(b2b2cSonarCloudStatusData)
-                                        ? null
-                                        : b2b2cSonarCloudStatusData
-                                              .projectStatus?.status
-                                }
+                                result={Array.isArray(b2b2cSonarCloudStatusData) ? null : b2b2cSonarCloudStatusData.projectStatus?.status}
                                 icon={<FingerprintIcon fontSize="inherit" />}
                             />
                         </Grid>
@@ -163,12 +141,7 @@ const Dashboard = () => {
                                 isLoading={isLoading}
                                 title="coincover-txm"
                                 subtitle="SonarCloud"
-                                result={
-                                    Array.isArray(txmSonarCloudStatusData)
-                                        ? null
-                                        : txmSonarCloudStatusData.projectStatus
-                                              ?.status
-                                }
+                                result={Array.isArray(txmSonarCloudStatusData) ? null : txmSonarCloudStatusData.projectStatus?.status}
                                 icon={<SupportIcon fontSize="inherit" />}
                             />
                         </Grid>

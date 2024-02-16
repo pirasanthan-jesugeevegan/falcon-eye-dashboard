@@ -21,17 +21,12 @@ export const theme = (customization: CustomTheme) => {
         heading: theme === 'light' ? color.grey900 : color.darkTextTitle,
         paper: theme === 'light' ? color.paper : color.darkPaper,
         backgroundDefault: theme === 'light' ? color.paper : color.darkPaper,
-        background:
-            theme === 'light' ? color.primaryLight : color.darkBackground,
-        darkTextPrimary:
-            theme === 'light' ? color.grey700 : color.darkTextPrimary,
-        darkTextSecondary:
-            theme === 'light' ? color.grey500 : color.darkTextSecondary,
+        background: theme === 'light' ? color.primaryLight : color.darkBackground,
+        darkTextPrimary: theme === 'light' ? color.grey700 : color.darkTextPrimary,
+        darkTextSecondary: theme === 'light' ? color.grey500 : color.darkTextSecondary,
         textDark: theme === 'light' ? color.grey900 : color.darkTextTitle,
-        menuSelected:
-            theme === 'light' ? color.secondaryDark : color.darkSecondaryMain,
-        menuSelectedBack:
-            theme === 'light' ? color.secondaryLight : '#7c4dff15',
+        menuSelected: theme === 'light' ? color.secondaryDark : color.darkSecondaryMain,
+        menuSelectedBack: theme === 'light' ? color.secondaryLight : '#7c4dff15',
         divider: theme === 'light' ? color.grey200 : color.grey600,
         customization,
     }

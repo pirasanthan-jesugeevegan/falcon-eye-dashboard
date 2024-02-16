@@ -88,18 +88,7 @@ const TotalGrowthBarChart = ({ isLoading }: { isLoading: boolean }) => {
         if (!isLoading) {
             ApexCharts.exec(`bar-chart`, 'updateOptions', newChartData)
         }
-    }, [
-        navType,
-        primaryLight,
-        primaryDark,
-        secondaryMain,
-        secondaryLight,
-        primary,
-        darkLight,
-        grey200,
-        isLoading,
-        grey500,
-    ])
+    }, [navType, primaryLight, primaryDark, secondaryMain, secondaryLight, primary, darkLight, grey200, isLoading, grey500])
 
     return (
         <>
@@ -109,26 +98,14 @@ const TotalGrowthBarChart = ({ isLoading }: { isLoading: boolean }) => {
                 <MainCard>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={12}>
-                            <Grid
-                                container
-                                alignItems="center"
-                                justifyContent="space-between"
-                            >
+                            <Grid container alignItems="center" justifyContent="space-between">
                                 <Grid item>
-                                    <Grid
-                                        container
-                                        direction="column"
-                                        spacing={1}
-                                    >
+                                    <Grid container direction="column" spacing={1}>
                                         <Grid item>
-                                            <Typography variant="subtitle2">
-                                                Total Growth
-                                            </Typography>
+                                            <Typography variant="subtitle2">Total Growth</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="h3">
-                                                $2,324.00
-                                            </Typography>
+                                            <Typography variant="h3">$2,324.00</Typography>
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -137,15 +114,10 @@ const TotalGrowthBarChart = ({ isLoading }: { isLoading: boolean }) => {
                                         id="standard-select-currency"
                                         select
                                         value={value}
-                                        onChange={(e) =>
-                                            setValue(e.target.value)
-                                        }
+                                        onChange={(e) => setValue(e.target.value)}
                                     >
                                         {status.map((option) => (
-                                            <MenuItem
-                                                key={option.value}
-                                                value={option.value}
-                                            >
+                                            <MenuItem key={option.value} value={option.value}>
                                                 {option.label}
                                             </MenuItem>
                                         ))}

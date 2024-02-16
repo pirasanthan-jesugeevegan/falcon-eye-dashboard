@@ -12,9 +12,7 @@ export default class ProductsController {
             const tableName = getTableName(type, product)
 
             if (!tableName) {
-                return res
-                    .status(400)
-                    .json({ error: 'Invalid type or product' })
+                return res.status(400).json({ error: 'Invalid type or product' })
             }
 
             const rawData = await queries.getTable(tableName)
@@ -23,10 +21,7 @@ export default class ProductsController {
 
             if (type === 'unit') {
                 data = rawData.reduce((acc, item) => {
-                    const existingItem = acc.find(
-                        (groupedItem: { pull_request: string }) =>
-                            groupedItem.pull_request === item.pull_request
-                    )
+                    const existingItem = acc.find((groupedItem: { pull_request: string }) => groupedItem.pull_request === item.pull_request)
 
                     if (existingItem) {
                         existingItem.result.push({
@@ -80,9 +75,7 @@ export default class ProductsController {
             const tableName = getTableName(type, product)
 
             if (!tableName) {
-                return res
-                    .status(400)
-                    .json({ error: 'Invalid type or product' })
+                return res.status(400).json({ error: 'Invalid type or product' })
             }
 
             let dataToInsert
@@ -141,9 +134,7 @@ export default class ProductsController {
             const tableName = getTableName(type, product)
 
             if (!tableName) {
-                return res
-                    .status(400)
-                    .json({ error: 'Invalid type or product' })
+                return res.status(400).json({ error: 'Invalid type or product' })
             }
 
             const deletedRows = await queries.deleteData(tableName, id)

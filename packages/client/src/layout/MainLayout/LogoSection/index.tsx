@@ -10,29 +10,19 @@ import { MENU_OPEN } from '../../../redux/actions'
 import React from 'react'
 
 const LogoSection = () => {
-    const defaultId = useSelector(
-        (state: ReduxState) => state.customization.defaultId
-    )
+    const defaultId = useSelector((state: ReduxState) => state.customization.defaultId)
     const dispatch = useDispatch()
     const theme = useTheme()
 
     return (
-        <ButtonBase
-            disableRipple
-            onClick={() => dispatch({ type: MENU_OPEN, id: defaultId })}
-            component={Link}
-            to={config.basename}
-        >
+        <ButtonBase disableRipple onClick={() => dispatch({ type: MENU_OPEN, id: defaultId })} component={Link} to={config.basename}>
             <div style={{ textAlignLast: 'center' }}>
                 <Typography
                     sx={{
                         fontSize: 'xx-large',
                         fontFamily: 'system-ui',
                         fontWeight: 'bolder',
-                        color:
-                            theme.palette.mode === 'dark'
-                                ? theme.palette.secondary.light
-                                : undefined,
+                        color: theme.palette.mode === 'dark' ? theme.palette.secondary.light : undefined,
                     }}
                 >
                     FALCON EYE
