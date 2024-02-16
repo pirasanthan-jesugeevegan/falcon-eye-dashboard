@@ -104,8 +104,8 @@
                 "bracketSpacing": true,
                 "printWidth": 140,
                 "singleQuote": true,
-                "trailingComma": "none",
-                "tabWidth": 2,
+                "trailingComma": "es5",
+                "tabWidth": 4,
                 "useTabs": false,
                 "endOfLine": "auto"
             }
