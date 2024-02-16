@@ -30,6 +30,5 @@
         "typescript": "^5.1.6",
         "yup": "^1.3.3"
     },
-    "main": "index.ts",
-    "homepage": "https://pirasanthan-jesugeevegan.github.io/falcon-eye-dashboard/"
+    "main": "index.ts"
 }
