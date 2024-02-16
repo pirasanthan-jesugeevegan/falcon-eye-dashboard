@@ -1,0 +1,32 @@
+name: Deploy Frontend to GitHub Pages
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    build-and-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v2
+
+            - name: Install Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: '16'
+
+            - name: Install Dependencies
+              run: yarn install
+
+            - name: Build Frontend
+              run: yarn workspace client build
+
+            - name: Deploy Frontend
+              uses: JamesIves/github-pages-deploy-action@4.1.3
+              with:
+                  branch: gh-pages
+                  folder: build
+                  token: ${{ secrets.GITHUB_TOKEN }}
