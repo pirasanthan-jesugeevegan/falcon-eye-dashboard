@@ -31,4 +31,4 @@ jobs:
               with:
                   branch: gh-pages
                   folder: packages/client/build
-                  token: ${{ secrets.GITHUB_TOKEN }}
+                  token: ${{ secrets.DEPLOY_TOKEN }}
