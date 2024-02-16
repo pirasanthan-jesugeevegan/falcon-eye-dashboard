@@ -41,6 +41,7 @@
     "plugins": ["prettier", "react", "react-hooks", "import"],
     "rules": {
         // "sort-imports": ["error", { "ignoreCase": true, "ignoreDeclarationSort": true }],
+        "react/prop-types": 0,
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "react/react-in-jsx-scope": "off",
