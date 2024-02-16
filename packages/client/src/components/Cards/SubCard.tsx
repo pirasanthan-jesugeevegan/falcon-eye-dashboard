@@ -1,5 +1,4 @@
-import { forwardRef } from 'react'
-
+import React, { forwardRef, ReactNode } from 'react'
 import {
     Card,
     CardContent,
@@ -8,19 +7,31 @@ import {
     Typography,
 } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
 
-const SubCard = forwardRef(
+interface SubCardProps {
+    children?: ReactNode
+    content?: boolean
+    contentClass?: string
+    darkTitle?: boolean
+    secondary?: ReactNode | string | object
+    sx?: object
+    contentSX?: object
+    title?: ReactNode
+    action?: ReactNode
+}
+
+const SubCard = forwardRef<HTMLDivElement, SubCardProps>(
     (
         {
             children,
-            content,
+            content = true,
             contentClass,
             darkTitle,
             secondary,
             sx = {},
             contentSX = {},
             title,
+            action,
             ...others
         },
         ref
@@ -41,18 +52,15 @@ const SubCard = forwardRef(
                 {...others}
             >
                 {/* card header and action */}
-                {!darkTitle && title && (
+                {title && (
                     <CardHeader
                         sx={{ p: 2.5 }}
-                        title={<Typography variant="h5">{title}</Typography>}
-                        action={secondary}
-                    />
-                )}
-                {darkTitle && title && (
-                    <CardHeader
-                        sx={{ p: 2.5 }}
-                        title={<Typography variant="h4">{title}</Typography>}
-                        action={secondary}
+                        title={
+                            <Typography variant={darkTitle ? 'h4' : 'h5'}>
+                                {title}
+                            </Typography>
+                        }
+                        action={action}
                     />
                 )}
 
@@ -80,28 +88,5 @@ const SubCard = forwardRef(
         )
     }
 )
-
-SubCard.propTypes = {
-    children: PropTypes.node,
-    content: PropTypes.bool,
-    contentClass: PropTypes.string,
-    darkTitle: PropTypes.bool,
-    secondary: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.string,
-        PropTypes.object,
-    ]),
-    sx: PropTypes.object,
-    contentSX: PropTypes.object,
-    title: PropTypes.oneOfType([
-        PropTypes.node,
-        PropTypes.string,
-        PropTypes.object,
-    ]),
-}
-
-SubCard.defaultProps = {
-    content: true,
-}
 
 export default SubCard

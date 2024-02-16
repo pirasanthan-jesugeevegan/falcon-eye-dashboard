@@ -2,21 +2,7 @@ import MuiAvatar from '@mui/material/Avatar'
 import { useTheme } from '@mui/material/styles'
 import React from 'react'
 
-interface AvatarProps {
-    className?: string
-    color?: string
-    outline?: boolean
-    size?: 'badge' | 'xs' | 'sm' | 'lg' | 'xl' | 'md'
-    sx?: React.CSSProperties
-}
-
-const Avatar: React.FC<AvatarProps> = ({
-    color,
-    outline,
-    size,
-    sx,
-    ...others
-}) => {
+const Avatar: React.FC<any> = ({ color, outline, size, sx, ...others }) => {
     const theme = useTheme()
 
     const colorSX = color &&

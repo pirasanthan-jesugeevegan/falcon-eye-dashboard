@@ -10,11 +10,16 @@ import {
 } from '@mui/material'
 import { IconBug, IconHeadphones, IconShieldLock } from '@tabler/icons'
 import ReactECharts from 'echarts-for-react'
-import PropTypes from 'prop-types'
-
 import JiraTicketSummaryCardSkeleton from 'components/Cards/Skeleton/JiraTicketSummaryCard'
+import React from 'react'
 
-const iconMap = {
+interface OverviewTrafficProps {
+    chartSeries: { value: number | undefined }[]
+    labels: string[]
+    sx?: React.CSSProperties
+}
+
+const iconMap: Record<string, JSX.Element> = {
     Bugs: (
         <SvgIcon>
             <IconBug />
@@ -32,8 +37,11 @@ const iconMap = {
     ),
 }
 
-export const OverviewTraffic = (props) => {
-    const { chartSeries, labels, sx } = props
+const OverviewTraffic: React.FC<OverviewTrafficProps> = ({
+    chartSeries,
+    labels,
+    sx,
+}) => {
     const theme = useTheme()
     const chartOptions = {
         color: [
@@ -49,7 +57,6 @@ export const OverviewTraffic = (props) => {
                 name: 'Jira Issue Type',
                 type: 'pie',
                 radius: ['40%', '70%'],
-
                 avoidLabelOverlap: false,
                 itemStyle: {
                     borderRadius: 10,
@@ -93,7 +100,6 @@ export const OverviewTraffic = (props) => {
                         >
                             {chartSeries.map((item, index) => {
                                 const label = labels[index]
-
                                 return (
                                     <Box
                                         key={label}
@@ -109,7 +115,7 @@ export const OverviewTraffic = (props) => {
                                         </Typography>
                                         <Typography
                                             color="text.secondary"
-                                            variant="subtitle"
+                                            variant="subtitle1"
                                         >
                                             {item.value}
                                         </Typography>
@@ -124,8 +130,4 @@ export const OverviewTraffic = (props) => {
     )
 }
 
-OverviewTraffic.propTypes = {
-    chartSeries: PropTypes.array.isRequired,
-    labels: PropTypes.array.isRequired,
-    sx: PropTypes.object,
-}
+export default OverviewTraffic

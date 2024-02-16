@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { Card, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
@@ -8,13 +8,13 @@ import { useSelector } from 'react-redux'
 
 import generateChartData from '../../constants/chart-data/bajaj-area-chart'
 
-const BajajAreaChartCard = ({ testResults }) => {
+const BajajAreaChartCard = ({ testResults }: any) => {
     const theme = useTheme()
 
-    const customization = useSelector((state) => state.customization)
+    const customization = useSelector((state: any) => state.customization)
     const { navType } = customization
 
-    const orangeDark = theme.palette.secondary[800]
+    const orangeDark = theme.palette.secondary.dark
 
     useEffect(() => {
         const newSupportChart = {

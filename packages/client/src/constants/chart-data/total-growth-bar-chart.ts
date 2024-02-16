@@ -1,4 +1,4 @@
-const chartData = {
+const chartData: any = {
     height: 480,
     type: 'bar',
     options: {

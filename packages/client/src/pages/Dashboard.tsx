@@ -46,7 +46,7 @@ const Dashboard = () => {
     const [isLoading, setLoading] = useState<boolean>(true)
 
     useEffect(() => {
-        setLoading(false)
+        setLoading(true)
         const fetchData = async () => {
             try {
                 const result = await getE2eTotalTest()

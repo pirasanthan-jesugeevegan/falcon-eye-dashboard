@@ -6,7 +6,7 @@ import React from 'react'
 
 interface RowProps {
     title?: string
-    data?: { title: string; status: string; result: string }
+    data?: ProductsOverviewData
 }
 
 const Row = ({ title, data }: RowProps) => {
@@ -51,11 +51,11 @@ const Row = ({ title, data }: RowProps) => {
                                         backgroundColor:
                                             status === 'pass'
                                                 ? theme.palette.success.light
-                                                : 'orange.dark',
+                                                : theme.palette.orange.light,
                                         color:
                                             status === 'pass'
-                                                ? 'success.dark'
-                                                : 'orange.dark',
+                                                ? theme.palette.success.dark
+                                                : theme.palette.orange.dark,
                                         ml: 2,
                                     }}
                                 >

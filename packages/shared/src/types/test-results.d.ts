@@ -24,3 +24,9 @@ interface UnitTestResult {
     line_coverage: string
     author: string
 }
+
+interface ProductsOverviewData {
+    name: string
+    result: string
+    status: string
+}

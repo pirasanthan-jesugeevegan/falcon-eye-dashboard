@@ -1,19 +1,15 @@
-import { useEffect, useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
 import { CardContent, Divider, Grid, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
-
-import MainCard from '../../components/Cards/MainCard'
-import SkeletonPopularCard from '../../components/Cards/Skeleton/PopularCard'
-import Row from '../../components/Row'
-
+import MainCard from './MainCard'
+import SkeletonPopularCard from './Skeleton/PopularCard'
+import Row from '../Row'
 import { getStatus } from '../../api/get-test-data'
 import { gridSpacing } from '../../redux/constants'
 
-const E2ETestStatusCard = ({ isLoading }) => {
+const E2ETestStatusCard = ({ isLoading }: { isLoading: boolean }) => {
     const [data, setData] = useState([])
-    const [isDataLoading, setIsDataLoading] = useState(true)
+    const [isDataLoading, setIsDataLoading] = useState<boolean>(true)
     const theme = useTheme()
 
     useEffect(() => {
@@ -62,7 +58,7 @@ const E2ETestStatusCard = ({ isLoading }) => {
                                 </Grid>
                             </Grid>
                             <Grid item xs={12}>
-                                {data?.map((product) => (
+                                {data?.map((product: ProductsOverviewData) => (
                                     <>
                                         <Row
                                             title={product.name}
@@ -78,10 +74,6 @@ const E2ETestStatusCard = ({ isLoading }) => {
             )}
         </>
     )
-}
-
-E2ETestStatusCard.propTypes = {
-    isLoading: PropTypes.bool,
 }
 
 export default E2ETestStatusCard

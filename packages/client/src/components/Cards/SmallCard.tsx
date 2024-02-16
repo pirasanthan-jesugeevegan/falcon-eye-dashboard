@@ -8,50 +8,60 @@ import {
     Typography,
 } from '@mui/material'
 import { styled, useTheme } from '@mui/material/styles'
-import PropTypes from 'prop-types'
-
+import React from 'react'
 import MainCard from './MainCard'
 import TotalIncomeCard from './Skeleton/TotalIncomeCard'
 
-const CardWrapper = styled(MainCard)(({ theme, backgroundColor }) => ({
-    backgroundColor:
-        theme.palette.mode === 'light'
-            ? backgroundColor && theme.palette[backgroundColor]?.dark
-            : theme.palette.dark.dark,
-    color: backgroundColor && theme.palette[backgroundColor]?.light,
-    overflow: 'hidden',
-    position: 'relative',
-    '&:after': {
-        content: '""',
-        position: 'absolute',
-        width: 210,
-        height: 210,
-        background: `linear-gradient(210.04deg, ${
-            backgroundColor
-                ? theme.palette[backgroundColor][200]
-                : theme.palette.warning.dark
-        } -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
-        borderRadius: '50%',
-        top: -30,
-        right: -180,
-    },
-    '&:before': {
-        content: '""',
-        position: 'absolute',
-        width: 210,
-        height: 210,
-        background: `linear-gradient(140.9deg, ${
-            backgroundColor
-                ? theme.palette[backgroundColor][200]
-                : theme.palette.warning.dark
-        } -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
-        borderRadius: '50%',
-        top: -160,
-        right: -130,
-    },
-}))
+interface SmallCardProps {
+    isLoading?: boolean
+    title?: string
+    subtitle?: string
+    result?: string | null
+    icon?: React.ReactNode
+    backgroundColor?: string
+}
 
-const SmallCard = ({
+const CardWrapper = styled(MainCard)<{ backgroundColor?: any }>(
+    ({ theme, backgroundColor }) => ({
+        backgroundColor:
+            theme.palette.mode === 'light'
+                ? backgroundColor && backgroundColor.dark
+                : theme.palette.dark.dark,
+        color: backgroundColor && backgroundColor.light,
+        overflow: 'hidden',
+        position: 'relative',
+        '&:after': {
+            content: '""',
+            position: 'absolute',
+            width: 210,
+            height: 210,
+            background: `linear-gradient(210.04deg, ${
+                backgroundColor
+                    ? backgroundColor[200]
+                    : theme.palette.warning.dark
+            } -50.94%, rgba(144, 202, 249, 0) 83.49%)`,
+            borderRadius: '50%',
+            top: -30,
+            right: -180,
+        },
+        '&:before': {
+            content: '""',
+            position: 'absolute',
+            width: 210,
+            height: 210,
+            background: `linear-gradient(140.9deg, ${
+                backgroundColor
+                    ? backgroundColor[200]
+                    : theme.palette.warning.dark
+            } -14.02%, rgba(144, 202, 249, 0) 77.58%)`,
+            borderRadius: '50%',
+            top: -160,
+            right: -130,
+        },
+    })
+)
+
+const SmallCard: React.FC<SmallCardProps> = ({
     isLoading,
     title,
     subtitle,
@@ -60,7 +70,10 @@ const SmallCard = ({
     backgroundColor,
 }) => {
     const theme = useTheme()
-    const resultColor = (backgroundColor, result) => {
+    const resultColor = (
+        backgroundColor: string | undefined,
+        result: string | undefined
+    ) => {
         if (result === 'OK') {
             return theme.palette.success.main
         } else if (result === 'ERROR') {
@@ -71,17 +84,27 @@ const SmallCard = ({
             return 'black'
         }
     }
+    const backgroundColorPicker = (backgroundColor: any, theme: any) => {
+        if (backgroundColor === 'primary') {
+            return theme.palette.primary
+        } else if (backgroundColor === 'secondary') {
+            return theme.palette.secondary
+        } else {
+            undefined
+        }
+    }
     return (
         <>
-            {isLoading ||
-            String(title).includes('undefined') ||
-            String(result).includes('undefined') ? (
+            {isLoading || !title || !result ? (
                 <TotalIncomeCard />
             ) : (
                 <CardWrapper
                     border={false}
                     content={false}
-                    backgroundColor={backgroundColor}
+                    backgroundColor={backgroundColorPicker(
+                        backgroundColor,
+                        theme
+                    )}
                     sx={{ boxShadow: theme.shadows[10] }}
                 >
                     <Box sx={{ p: 2 }}>
@@ -100,9 +123,10 @@ const SmallCard = ({
                                             backgroundColor:
                                                 theme.palette.mode === 'light'
                                                     ? backgroundColor
-                                                        ? theme.palette[
-                                                              backgroundColor
-                                                          ][800]
+                                                        ? backgroundColorPicker(
+                                                              backgroundColor,
+                                                              theme
+                                                          )[800]
                                                         : theme.palette.warning
                                                               .light
                                                     : theme.palette.dark.main,
@@ -163,15 +187,6 @@ const SmallCard = ({
             )}
         </>
     )
-}
-
-SmallCard.propTypes = {
-    isLoading: PropTypes.bool,
-    title: PropTypes.string,
-    subtitle: PropTypes.string,
-    result: PropTypes.string,
-    icon: PropTypes.node,
-    backgroundColor: PropTypes.string,
 }
 
 export default SmallCard

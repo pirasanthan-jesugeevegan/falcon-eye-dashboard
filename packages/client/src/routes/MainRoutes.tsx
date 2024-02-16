@@ -1,15 +1,13 @@
 import React from 'react'
+import { OverridableComponent } from '@mui/material/OverridableComponent'
+import { SvgIconTypeMap } from '@mui/material'
 import { lazy } from 'react'
-
-// project imports
 import Loadable from '../components/Loadable'
 import MainLayout from '../layout/MainLayout'
-// pages
 const Dashboard = Loadable(lazy(() => import('../pages/Dashboard')))
 const Products = Loadable(lazy(() => import('../pages/Products')))
 const Jira = Loadable(lazy(() => import('../pages/Jira')))
 const SonarCloud = Loadable(lazy(() => import('../pages/SonarCloud')))
-
 import jiraData from '../menu-items/jira'
 import productData from '../menu-items/product'
 
@@ -17,9 +15,16 @@ const componentsMap = {
     Products: Products,
     Jira: Jira,
 }
+interface MainRoutes {
+    icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & { muiName: string }
+    id: string
+    title: string
+    type: string
+    url: string
+}
 
-function transformProductData(data) {
-    return data.map((item) => ({
+function transformProductData(data: MainRoutes[]) {
+    return data.map((item: any) => ({
         path: item.id,
         children: [
             {
@@ -32,8 +37,8 @@ function transformProductData(data) {
     }))
 }
 
-function transformJiraData(data) {
-    return data.children.map((child) => ({
+function transformJiraData(data: any) {
+    return data.children.map((child: any) => ({
         path: child.url.split('/').pop(),
         element: React.createElement(Jira, { title: child.title }),
     }))
