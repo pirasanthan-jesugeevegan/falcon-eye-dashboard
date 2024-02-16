@@ -12,6 +12,8 @@ jobs:
         steps:
             - name: Checkout Repository
               uses: actions/checkout@v2
+              with:
+                  persist-credentials: false
 
             - name: Install Node.js
               uses: actions/setup-node@v2
@@ -19,10 +21,10 @@ jobs:
                   node-version: '16'
 
             - name: Install Dependencies
-              run: yarn install
+              run: cd packages/client && yarn install
 
             - name: Build Frontend
-              run: yarn workspace client build
+              run: cd packages/client && yarn build
 
             - name: Deploy Frontend
               uses: JamesIves/github-pages-deploy-action@4.1.3
