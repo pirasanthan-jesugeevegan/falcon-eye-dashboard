@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/falcon-eye-dashboard/static/css/main.a66e4805.css",
-    "main.js": "/falcon-eye-dashboard/static/js/main.f091b400.js",
+    "main.js": "/falcon-eye-dashboard/static/js/main.43880e1e.js",
     "static/js/816.946439d8.chunk.js": "/falcon-eye-dashboard/static/js/816.946439d8.chunk.js",
     "static/js/440.ce26d695.chunk.js": "/falcon-eye-dashboard/static/js/440.ce26d695.chunk.js",
     "static/js/156.16b5a541.chunk.js": "/falcon-eye-dashboard/static/js/156.16b5a541.chunk.js",
@@ -14,7 +14,7 @@
     "static/js/960.56b5f1e1.chunk.js": "/falcon-eye-dashboard/static/js/960.56b5f1e1.chunk.js",
     "index.html": "/falcon-eye-dashboard/index.html",
     "main.a66e4805.css.map": "/falcon-eye-dashboard/static/css/main.a66e4805.css.map",
-    "main.f091b400.js.map": "/falcon-eye-dashboard/static/js/main.f091b400.js.map",
+    "main.43880e1e.js.map": "/falcon-eye-dashboard/static/js/main.43880e1e.js.map",
     "816.946439d8.chunk.js.map": "/falcon-eye-dashboard/static/js/816.946439d8.chunk.js.map",
     "440.ce26d695.chunk.js.map": "/falcon-eye-dashboard/static/js/440.ce26d695.chunk.js.map",
     "156.16b5a541.chunk.js.map": "/falcon-eye-dashboard/static/js/156.16b5a541.chunk.js.map",
@@ -28,6 +28,6 @@
   },
   "entrypoints": [
     "static/css/main.a66e4805.css",
-    "static/js/main.f091b400.js"
+    "static/js/main.43880e1e.js"
   ]
 }
