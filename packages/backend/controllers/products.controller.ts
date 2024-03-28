@@ -131,6 +131,7 @@ export default class ProductsController {
             }
             res.status(500).json({
                 message: 'Internal Server Error!',
+                error: err,
             })
         }
     }
@@ -147,7 +148,7 @@ export default class ProductsController {
             }
 
             const deletedRows = await queries.deleteData(tableName, id)
-            if (deletedRows > 0) {
+            if (deletedRows !== null && deletedRows > 0) {
                 res.status(200).json({ message: 'Data deleted successfully' })
             } else {
                 res.status(404).json({ error: 'Data not found' })

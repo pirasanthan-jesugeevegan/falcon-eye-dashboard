@@ -11,5 +11,6 @@
         "resolveJsonModule": true,
         "baseUrl": "./"
     },
-    "include": ["../shared/src/types/*"]
+    "include": ["../shared/src/types/*"],
+    "exclude": ["./coverage", "./dist", "__tests__", "jest.config.ts"]
 }

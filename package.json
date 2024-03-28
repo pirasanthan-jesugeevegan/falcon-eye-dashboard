@@ -3,13 +3,12 @@
     "name": "new-falcon-eye",
     "version": "1.0.0",
     "workspaces": [
-        "packages/backend",
-        "packages/client",
-        "packages/shared"
+        "packages/*"
     ],
     "scripts": {
         "prettier-all": "prettier --write \"**/*{ts,js,css,html,jsx,tsx}\"",
         "client": "yarn workspace client start",
+        "client:build": "yarn workspace client build",
         "backend": "yarn workspace backend start",
         "start": "concurrently --kill-others-on-fail \"yarn backend\"  \"yarn client\"",
         "fix:prettier": "prettier --write \"**/*.*\""
