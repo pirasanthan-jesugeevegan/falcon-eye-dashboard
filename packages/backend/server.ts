@@ -8,6 +8,9 @@ import Routes from './routes'
 const createServer = (reqLimit = '100kb') => {
     const app = express()
 
+    app.get('/is-alive', (req, res) => {
+        res.status(200).send('OK')
+    })
     app.use(cors())
     app.use(bodyParser.urlencoded({ extended: false, limit: reqLimit }))
     app.use(bodyParser.json({ limit: reqLimit }))
