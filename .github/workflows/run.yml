@@ -1,0 +1,38 @@
+on: [push]
+
+jobs:
+  run_github_action:
+    runs-on: ubuntu-latest
+    name: Run job
+    permissions:
+      contents: read
+      packages: read
+    env:
+      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_TOKEN }}
+
+      - name: Automation action step
+        uses: ./
+        continue-on-error: true
+        id: results
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GH_TOKEN }}
+          env: 'dev'
+          test-type: 'api'
+          product: 'test'
+
+      - name: Get the output time
+        run: echo "${{ steps.results.outputs.passed }}"
+      - name: Get the output time
+        run: echo "${{ steps.results.outputs.failed }}"
+      - name: Get the output time
+        run: echo "${{ steps.results.outputs.status }}"
