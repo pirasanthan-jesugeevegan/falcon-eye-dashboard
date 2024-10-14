@@ -8,7 +8,7 @@ jobs:
       contents: read
       packages: read
     env:
-      GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GH_TOKEN }}
+          password: ${{ secrets.DEPLOY_TOKEN }}
 
       - name: Automation action step
         uses: ./
@@ -25,7 +25,7 @@ jobs:
         id: results
         with:
           username: ${{ github.actor }}
-          password: ${{ secrets.GH_TOKEN }}
+          password: ${{ secrets.DEPLOY_TOKEN }}
           env: 'dev'
           test-type: 'api'
           product: 'test'
